@@ -54,7 +54,7 @@ span: {start: day, offset: -1d}
 now: {show: true}
 yaxis: [{decimals: 0}]
 series:
-  - entity: sensor.pegel_travemunde_wasserstand
+  - entity: sensor.pegel_travemunde_water_level
     name: Messung
     stroke_width: 2
   - entity: sensor.pegel_travemunde_forecast_high_bsh
