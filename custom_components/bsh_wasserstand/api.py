@@ -37,7 +37,7 @@ class BshClient:
     async def _get(self, url: str) -> tuple[Any, bool]:
         """Return the document and whether it changed since the last call."""
         cached = self._cache.get(url)
-        headers = {"Accept": "application/json"}
+        headers = {"Accept": "application/json, application/geo+json, */*;q=0.5"}
         if cached:
             headers |= cached.validators
         try:
