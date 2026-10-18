@@ -62,18 +62,8 @@ def crossings(
         if hits:
             found.append(Crossing("forecast", hits[0], extreme(hits, kind)))
 
-    if data.official:
-        # The running period also contains the past hours of the day (e.g. a
-        # surge peak that is already over); measurement and model cover it in
-        # 15-minute steps, so only later official periods can raise an alert.
-        for period in data.official.periods[1:]:
-            value = period.upper if kind == HIGH else period.lower
-            if hit(value):
-                found.append(
-                    Crossing(
-                        f"official: {period.label}", None, None, period.label, value
-                    )
-                )
+    # The official ranges are too coarse for alerts (a period also covers
+    # hours that are already over); they are shown as information only.
     return found
 
 

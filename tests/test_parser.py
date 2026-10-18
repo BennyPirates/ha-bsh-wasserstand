@@ -119,15 +119,11 @@ class AnalysisTest(unittest.TestCase):
         found = analysis.crossings(self.data, NOW, 100, analysis.HIGH)
         sources = {c.source for c in found}
         self.assertIn("observation", sources)
-        # The running official period ("Bis Sonntag Abend" up to +115) is
-        # covered by measurement and model and must not hold an alert.
         self.assertFalse(any(s.startswith("official") for s in sources))
 
-    def test_later_official_period(self) -> None:
+    def test_official_is_information_only(self) -> None:
         found = analysis.crossings(self.data, NOW, 60, analysis.HIGH)
-        official = [c for c in found if c.source.startswith("official")]
-        self.assertEqual([c.label for c in official], ["Sonntag in der Nacht"])
-        self.assertEqual(official[0].value, 65)
+        self.assertFalse(any(c.source.startswith("official") for c in found))
 
     def test_no_crossing(self) -> None:
         self.assertEqual(analysis.crossings(self.data, NOW, 300, analysis.HIGH), [])
