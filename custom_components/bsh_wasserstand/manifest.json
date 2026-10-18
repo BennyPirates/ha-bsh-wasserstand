@@ -1,0 +1,12 @@
+{
+  "domain": "bsh_wasserstand",
+  "name": "BSH Wasserstand Ostsee",
+  "codeowners": ["@BennyPirates"],
+  "config_flow": true,
+  "documentation": "https://github.com/BennyPirates/ha-bsh-wasserstand",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/BennyPirates/ha-bsh-wasserstand/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}

@@ -1,0 +1,93 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "BSH Pegel hinzufügen",
+        "description": "Name des Pegels wie in der BSH-Adresse, z. B. travemuende für https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/travemuende",
+        "data": {
+          "station": "Pegel"
+        }
+      }
+    },
+    "error": {
+      "invalid_station": "Nur Kleinbuchstaben, Ziffern, - und _",
+      "station_not_found": "Pegel beim BSH nicht gefunden",
+      "cannot_connect": "BSH nicht erreichbar",
+      "unexpected_page": "Seite hat unerwartetes Format"
+    },
+    "abort": {
+      "already_configured": "Pegel ist bereits eingerichtet"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Einstellungen",
+        "data": {
+          "scan_interval": "Abrufintervall",
+          "horizon": "Vorhersagehorizont für Extremwerte und Warnungen",
+          "use_band": "Unsicherheitsband für Warnungen berücksichtigen"
+        },
+        "data_description": {
+          "scan_interval": "Die Modellgrafik ist ca. 5 MB groß; unveränderte Daten werden per HTTP-Cache nicht neu geladen."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "water_level": {
+        "name": "Wasserstand"
+      },
+      "bsh_high": {
+        "name": "Höchststand Vorhersage BSH"
+      },
+      "bsh_low": {
+        "name": "Tiefststand Vorhersage BSH"
+      },
+      "dmi_high": {
+        "name": "Höchststand Vorhersage DMI"
+      },
+      "dmi_low": {
+        "name": "Tiefststand Vorhersage DMI"
+      },
+      "band_high": {
+        "name": "Höchststand inkl. Unsicherheit"
+      },
+      "band_low": {
+        "name": "Tiefststand inkl. Unsicherheit"
+      },
+      "official": {
+        "name": "Offizielle Vorhersage"
+      },
+      "official_high": {
+        "name": "Offizielle Vorhersage Höchstwert"
+      },
+      "official_low": {
+        "name": "Offizielle Vorhersage Tiefstwert"
+      },
+      "official_issued": {
+        "name": "Offizielle Vorhersage erstellt"
+      }
+    },
+    "binary_sensor": {
+      "high_expected": {
+        "name": "Hochwasser erwartet"
+      },
+      "low_expected": {
+        "name": "Niedrigwasser erwartet"
+      },
+      "data_problem": {
+        "name": "Datenproblem"
+      }
+    },
+    "number": {
+      "high_threshold": {
+        "name": "Warnschwelle Hochwasser"
+      },
+      "low_threshold": {
+        "name": "Warnschwelle Niedrigwasser"
+      }
+    }
+  }
+}

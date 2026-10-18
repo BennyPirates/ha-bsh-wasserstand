@@ -1,0 +1,93 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add BSH gauge",
+        "description": "Gauge name as in the BSH address, e.g. travemuende for https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/travemuende",
+        "data": {
+          "station": "Gauge"
+        }
+      }
+    },
+    "error": {
+      "invalid_station": "Only lowercase letters, digits, - and _",
+      "station_not_found": "Gauge not found at BSH",
+      "cannot_connect": "Cannot reach BSH",
+      "unexpected_page": "Unexpected page format"
+    },
+    "abort": {
+      "already_configured": "Gauge already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Settings",
+        "data": {
+          "scan_interval": "Polling interval",
+          "horizon": "Forecast horizon for extremes and alerts",
+          "use_band": "Include uncertainty band in alerts"
+        },
+        "data_description": {
+          "scan_interval": "The model figure is about 5 MB; unchanged data is not downloaded again thanks to HTTP caching."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "water_level": {
+        "name": "Water level"
+      },
+      "bsh_high": {
+        "name": "Forecast high BSH"
+      },
+      "bsh_low": {
+        "name": "Forecast low BSH"
+      },
+      "dmi_high": {
+        "name": "Forecast high DMI"
+      },
+      "dmi_low": {
+        "name": "Forecast low DMI"
+      },
+      "band_high": {
+        "name": "Forecast high incl. uncertainty"
+      },
+      "band_low": {
+        "name": "Forecast low incl. uncertainty"
+      },
+      "official": {
+        "name": "Official forecast"
+      },
+      "official_high": {
+        "name": "Official forecast high"
+      },
+      "official_low": {
+        "name": "Official forecast low"
+      },
+      "official_issued": {
+        "name": "Official forecast issued"
+      }
+    },
+    "binary_sensor": {
+      "high_expected": {
+        "name": "High water expected"
+      },
+      "low_expected": {
+        "name": "Low water expected"
+      },
+      "data_problem": {
+        "name": "Data problem"
+      }
+    },
+    "number": {
+      "high_threshold": {
+        "name": "High water threshold"
+      },
+      "low_threshold": {
+        "name": "Low water threshold"
+      }
+    }
+  }
+}

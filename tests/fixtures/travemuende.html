@@ -1,0 +1,371 @@
+<!DOCTYPE HTML>
+ 
+<html lang="de">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="Wasserstand, Wasserstandsvorhersage, Sturmflut, Sturmflutwarnung, Ostsee, Deutschland, Mecklenburg-Vorpommern, Schleswig-Holstein, BSH">
+<meta name="copyright" content="<a href=https://www.bsh.de>Bundesamt für Seeschifffahrt und Hydrographie</a>">
+<meta name="author" content="Bundesamt für Seeschifffahrt und Hydrographie (BSH)">
+<meta name="created" content="2026-10-18 09:08:24">
+<meta charset="utf-8">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="refresh" content="300">
+<link rel="icon" type="image/png" href="aux/favicon-96x96.png" sizes="96x96">
+<link rel="shortcut icon" href="aux/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="aux/apple-touch-icon.png">
+<link rel="manifest" href="aux/site.webmanifest">
+<title>Wasserstand Travemünde</title> 
+
+<link href="aux/shared.css" rel="stylesheet">
+
+<style>
+        body {
+            background-color: #01659d;
+            color: #fff;
+        }
+
+        .content-wrapper {
+          max-width: 1024px !important;
+          padding: 2em 0;
+        }
+	
+        .minimap {
+          border:none;
+          width:100%;
+          height:250px;
+          border-radius:10px;
+        }
+
+        .white-box {
+          background-color: #ffffff;
+          color: #000000;
+          margin-bottom: 3rem;
+          box-shadow: 0 .5rem 1rem rgba(0,0,0,.4) !important;
+        }
+
+        .padding-textbox {
+          padding-bottom: 1.5rem !important;
+          padding-top: 3rem !important;
+          padding-left: 4rem !important;
+          padding-right: 4rem !important;
+        }
+		
+		.infobox { 
+          border: 2px solid; 
+          border-radius: 5px; 
+          padding: 10px; 
+          margin: 15px 20px; 
+          border-color: #0096C7;
+          background-color: rgba(0, 150, 199, 0.1);
+        } 
+
+        .bild-container {
+          display: flex;
+          justify-content: center; /* optional: zentriert die Bilder */
+          gap: 20px; /* Abstand zwischen den Bildern */
+         }
+
+         .bild-container img {
+           max-width: 100%; /* oder max-width: 100%; für responsive Bilder */
+           height: auto;
+         }
+         #coords,
+         #title .region {
+          font-size:.8rem;
+          font-weight:400;
+          margin-top:.8rem;
+          vertical-align:super
+        }
+
+        #desktop-version {
+          display: block;
+        }
+
+        #mobile-version {
+          display: none;
+        }
+
+        @media (min-width: 769px) {
+          .padding-textbox.desktop-no-horizontal-padding {
+             padding-left: 1rem !important;
+             padding-right: 1rem !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .padding-textbox {
+             padding-bottom: 1rem !important;
+             padding-top: 2rem !important;
+             padding-left: 1rem !important;
+             padding-right: 1rem !important;
+          }
+		  
+		  .infobox {
+		     margin: 1rem 0rem;
+		  }
+
+          .row {
+             margin-left: 0rem;
+             margin-right: 0rem;
+          }
+		  
+		  .summary_pad {
+             padding: 0 12px;
+          }
+
+          
+          #desktop-version {
+            display: none;
+          }
+          #mobile-version {
+            display: block;
+          }
+        }
+
+</style>
+</head>
+
+<body lang="de">
+
+<nav id="header" class="navbar navbar-expand-lg py-0">
+  <div id="header-bsh-bg" class="d-print-none"></div>
+  <div class="container p-0">
+  <div id="header-content" class="row mx-print-0">
+  <div id="header-bsh-logo" class="app-logo col-auto me-2">
+    <a href="https://www.bsh.de" title="BSH-Webseite"><img src="aux/bsh-logo.svg" alt="BSH-Logo"></a>
+  </div>
+  <div class="col p-0">
+  <div id="header-bsh" class="row align-items-center d-print-none ms-0">
+    <div id="header-bsh-claim" class="col me-auto p-0">
+      <span class="claim">Das BSH. Schifffahrt. Klima. Daten. Und viel Meer.</span>
+    </div>
+  </div>
+  <div id="header-app" class="row align-items-center">
+    <div id="header-app-title" class="col py-2" style="color:#000;">
+      <h1><a href="https://wasserstand.bsh.de">Wasserstands­vorhersage</a></h1>
+    </div>
+  </div>
+  </div></div></div>
+</nav>
+
+<div class="container content-wrapper">
+
+<div class="row">
+  <h2 id="title" class="filler"><svg class="svg-inline--fa fa-location-dot" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="location-dot" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"></path></svg><!-- <i class="fa-solid fa-location-dot"></i> Font Awesome fontawesome.com -->
+  <span class="pegel-name">Travemünde</span>
+  <span id="coords" class="badge bg-secondary mt-md-0">N 53.958°, O 10.872°</span></h2>
+</div>
+
+<div>
+<details id="vorhersage" style="margin-bottom: 3rem">
+  <summary class="summary_pad" style="font-size: 1.3rem; line-height: 1.2;">Vorhersage für das Gebiet "Lübecker&nbsp;Bucht"</summary>
+  <div class="row">
+    <div class="col-12 col-md-6 pt-4">
+      <table class="table scheiteltable scheitelwerte">
+	    <thead>
+          <tr>
+	        <th scope="col" style="color:white;vertical-align: middle;">Datum</th>
+	        <th scope="col" style="color:white;vertical-align: middle;">Abweichung von <abbr title="Die Angaben bezeichnen die erwarteten Abweichungen vom Normalhöhennull (NHN) bzw. dem identischen Seekartennull (SKN). Negative Werte = unter NHN, positive Werte = über NHN." style='cursor:help;'>NHN/SKN</abbr></th>
+	      </tr>
+        </thead>
+	    <tbody>
+	      <tr>
+	        <td style="color:white;vertical-align: middle;">Bis Sonntag Abend</td>
+	        <td style="color:white;vertical-align: middle;">+35 cm bis +115 cm</td>
+	      </tr>
+	      <tr>
+	        <td style="color:white;vertical-align: middle;">Sonntag in der Nacht</td>
+	        <td style="color:white;vertical-align: middle;">+30 cm bis +65 cm</td>
+	      </tr>
+	      <tr>
+	        <td style="color:white;vertical-align: middle;">Montag im Tagesverlauf</td>
+	        <td style="color:white;vertical-align: middle;">+30 cm bis +55 cm</td>
+	      </tr>
+	    </tbody>
+      </table>
+      <span class="pegel-name">Vorhersage erstellt am: So, 18.10.2026, 07:45</span>
+	  <br>
+    </div>
+
+    <div class="col-12 col-md-6 pt-4">
+      <iframe src="aux/minimap/minimap-travemuende.html" class="minimap"></iframe>
+    </div>
+  </div>
+</details>
+</div>
+
+<div class="white-box padding-textbox">
+  <h2>Modellvorhersage für Travemünde</h2> 
+
+  <div id="desktop-version">
+    <img src="figures/travemuende-wasserstand-desktop.png" border="0" 
+         alt="automatisierte Wasserstand-Vorhersage Travemünde" 
+         title="automatisierte Wasserstand-Vorhersage Travemünde" style="width:100%">
+  </div>
+
+  <div id="mobile-version">
+    <img src="figures/travemuende-wasserstand-mobile.png" border="0"
+         alt="automatisierte Wasserstand-Vorhersage Travemünde"
+         title="automatisierte Wasserstand-Vorhersage Travemünde" style="width:100%">
+  </div>
+  <p class="infobox" style="display: none;"></p>
+  <p>Die Grafik zeigt die gemessenen Wasserstände (schwarze Linie) sowie daran anschließend eine Modellvorhersage für die nächsten drei Tage (gestrichelte Linie).
+  Eine Detailansicht der Modellvorhersage ist weiter unten dargestellt.</p>
+  <p>Farblich hinterlegt ist eine mit statistischen Methoden abgeschätzte Unsicherheit des Modells, in dessen Bereich sich der Wasserstand sehr wahrscheinlich bewegen wird.
+  In Einzelfällen kann der Wasserstand auch außerhalb des Bereiches liegen, wenn sich die Wettersituation sehr dynamisch entwickelt.
+  <!--Die zugrundeliegenden Daten können auch maschinenlesbar im <a href="https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/json/W_travemuende.json">JSON-Format abgerufen</a> werden.-->
+  </p>
+</div>
+
+<div class="white-box padding-textbox">
+  <h2>Detailansicht der Modellvorhersage</h2> 
+  <p>Die Abbildung stellt die gemessenen Wasserstände (schwarze Linie) sowie verschiedene Vorhersagen von hochaufgelösten Modellen dar, 
+  die auf die Hydrodynamik der westlichen Ostsee spezialisiert sind (farbige Linien).</p>
+
+  <div id="plotly-container"></div>
+
+  <p>Einzelne Elemente können über die Legendeneinträge unterhalb der Abbildung ein- und ausgeblendet werden.</p>
+  <p>In die Modelle des <a href="https://www.bsh.de/DE/THEMEN/Modelle/Hydrodynamik/hydrodynamik_node.html">BSH</a> und <a href="https://www.dmi.dk/friedata/dokumentation/data/forecast-data-storm-surge-model-dkss">DMI</a> fließen jeweils unterschiedliche aktuelle Wettervorhersagen ein, was zu voneinander abweichenden Modellergebnissen führt.
+  Weichen die Modelle stark voneinander ab, deutet dies auf eine höhere Unsicherheit der Vorhersage aufgrund der Wetterlage hin. Liegen sie hingegen eng beieinander, 
+  ist die Vorhersage tendenziell zuverlässiger.
+  Die Modelle werden jeweils um 0 <abbr title="Koordinierte Weltzeit" style='cursor:help;'>UTC</abbr>, 6 UTC, 12 UTC und 18 UTC mit aktuellen Daten neu berechnet und stehen etwa 6 Stunden später zur Verfügung. 
+  Die Wasserstände sind als Abweichung vom <a href="https://www.bsh.de/DE/THEMEN/Vermessung_und_Kartographie/Seekartennull/Normalhoehennull/normalhoehennull_node.html">Normalhöhennull (NHN)</a> dargestellt. In der Ostsee entspricht das Normalhöhennull dem Seekartennull.</p>
+</div>
+
+
+<div class="row">
+  <div class="col-12">
+    <div class="px-3">
+      <h2>
+      <!--<svg class="svg-inline--fa fa-envelope" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="envelope" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"></path></svg> -->
+      <svg class="svg-inline--fa fa-ruler-vertical" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="ruler-vertical" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg=""><path fill="currentColor" d="M0 48C0 21.5 21.5 0 48 0L208 0c26.5 0 48 21.5 48 48l0 48-80 0c-8.8 0-16 7.2-16 16s7.2 16 16 16l80 0 0 64-80 0c-8.8 0-16 7.2-16 16s7.2 16 16 16l80 0 0 64-80 0c-8.8 0-16 7.2-16 16s7.2 16 16 16l80 0 0 64-80 0c-8.8 0-16 7.2-16 16s7.2 16 16 16l80 0 0 48c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 48z"></path></svg>
+      Messdaten</h2>
+    </div>
+<a id="wsv-info" class="card card-secondary d-block p-3" style="color:var(--bsh-blau);" href="https://www.pegelonline.wsv.de/gast/stammdaten?pegelnr=9620085#detail?id=c7383149-1f77-430d-8bef-c5667be3846b" target="_blank" 
+title="Externer Link&nbsp;öffnet die Pegelinformationen der Wasserstraßen- und Schifffahrtsverwaltung des Bundes (WSV) (Öffnet&nbsp;neues&nbsp;Fenster)">
+<svg class="svg-inline--fa fa-arrow-up-right-from-square" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-up-right-from-square" role="img" 
+xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+<path fill="currentColor" d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l82.7 0L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3l0 82.7c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160c0-17.7-14.3-32-32-32L320 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"></path>
+</svg><!-- <i class="fa-solid fa-arrow-up-right-from-square"></i> Font Awesome fontawesome.com -->  Beobachtungsdaten zum Pegel</a>
+  </div>
+</div>
+
+
+<div class="row">
+  <div id="kontakt-box" class="col-12 col-md-6 pt-4">
+    <div class="px-3">
+      <h2><svg class="svg-inline--fa fa-envelope" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="envelope" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"></path></svg><!-- <i class="fa-solid fa-envelope"></i> Font Awesome fontawesome.com -->Kontakt</h2>
+    </div>
+
+    <div id="kontakt" class="card card-secondary px-3 py-2">
+      <h3 class="h5">Wasser­stands­vor­her­sage­dienst Ostsee</h3>
+      <p>
+	    <a href="tel:+49 381 4563-781"><svg class="svg-inline--fa fa-phone" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="phone" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"></path></svg><!-- <i class="fa-solid fa-phone"></i> Font Awesome fontawesome.com -->+49 381 4563-781</a><br>
+        <svg class="svg-inline--fa fa-fax" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="fax" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M128 64l0 96 64 0 0-96 194.7 0L416 93.3l0 66.7 64 0 0-66.7c0-17-6.7-33.3-18.7-45.3L432 18.7C420 6.7 403.7 0 386.7 0L192 0c-35.3 0-64 28.7-64 64zM0 160L0 480c0 17.7 14.3 32 32 32l32 0c17.7 0 32-14.3 32-32l0-320c0-17.7-14.3-32-32-32l-32 0c-17.7 0-32 14.3-32 32zm480 32l-352 0 0 288c0 17.7 14.3 32 32 32l320 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32zM256 256a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm96 32a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm32 96a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM224 416a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"></path></svg><!-- <i class="fa-solid fa-fax"></i> Font Awesome fontawesome.com -->+49 381 4563-949<br>
+        <a href="mailto:wvd.rostock@bsh.de"><svg class="svg-inline--fa fa-envelope" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="envelope" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"></path></svg><!-- <i class="fa-solid fa-envelope"></i> Font Awesome fontawesome.com -->wvd.rostock@bsh.de</a>
+	  </p>
+    </div>
+  </div>
+
+  <div id="links-box" class="col-12 col-md-6 pt-4 d-print-none">
+    <div class="px-3">
+      <h2><svg class="svg-inline--fa fa-bookmark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bookmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"></path></svg><!-- <i class="fa-solid fa-bookmark"></i> Font Awesome fontawesome.com -->Mehr zum Thema</h2>
+    </div>
+  
+    <div class="card card-secondary px-3 py-2">
+      <ul id="links-bsh" class="links">
+	    <li><a class="bsh" href="https://www.bsh.de/DE/THEMEN/Wasserstand_und_Gezeiten/wasserstand_und_gezeiten_node.html"><img src="aux/bsh-logo-tiny.svg"><span>Wasserstand und Gezeiten</span></a></li>
+	    <li><a class="bsh" href="https://www.bsh.de/DE/THEMEN/Wasserstand_und_Gezeiten/Telefonwarnverteiler/telefonwarnverteiler_node.html"><img src="aux/bsh-logo-tiny.svg"><span>Warnverteiler</span></a></li>
+	    <li><a class="bsh" href="https://www.bsh.de/DE/THEMEN/Modelle/modelle_node.html"><img src="aux/bsh-logo-tiny.svg"><span>Operationelle Modellierung</span></a></li>
+	    <li><a class="bsh" href="https://www.bsh.de/DE/THEMEN/Wasserstand_und_Gezeiten/Sturmfluten/sturmfluten_node.html" title="Berichte zu Sturmfluten und extremen Wasserständen in der Nord- und Ostsee"><img src="aux/bsh-logo-tiny.svg"><span>Sturmfluten</span></a></li>
+	    <li><a class="bsh" href="https://marineforecast.bsh.de/" title="Externer Link&nbsp;öffnet Marine Forecast (Öffnet&nbsp;neues&nbsp;Fenster)" target="_blank"><img src="aux/bsh-logo-tiny.svg">Marine Forecast</a></li>
+	    <li><a class="extern" href="https://www.bsh-sturmflut.de" title="Externer Link&nbsp;öffnet die Sturmflutextraseite (Öffnet&nbsp;neues&nbsp;Fenster)" target="_blank"><svg class="svg-inline--fa fa-arrow-up-right-from-square" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-up-right-from-square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l82.7 0L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3l0 82.7c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160c0-17.7-14.3-32-32-32L320 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"></path></svg><!-- <i class="fa-solid fa-arrow-up-right-from-square"></i> Font Awesome fontawesome.com -->Sturmflutextraseite</a></li>
+	    <li><a class="extern" href="https://pegelportal-mv.de/pegel_mv.html" title="Externer Link&nbsp;öffnet die Seite Pegelportal MV (Öffnet&nbsp;neues&nbsp;Fenster)" target="_blank"><svg class="svg-inline--fa fa-arrow-up-right-from-square" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-up-right-from-square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l82.7 0L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3l0 82.7c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160c0-17.7-14.3-32-32-32L320 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"></path></svg><!-- <i class="fa-solid fa-arrow-up-right-from-square"></i> Font Awesome fontawesome.com -->Informationen aus M-V</a></li>
+	    <li><a class="extern" href="https://hsi-sh.de/pegelmap.html" title="Externer Link&nbsp;öffnet die Seite Hochwasser-Sturmflut-Information für Schleswig-Holstein (Öffnet&nbsp;neues&nbsp;Fenster)" target="_blank"><svg class="svg-inline--fa fa-arrow-up-right-from-square" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-up-right-from-square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l82.7 0L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3l0 82.7c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160c0-17.7-14.3-32-32-32L320 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"></path></svg><!-- <i class="fa-solid fa-arrow-up-right-from-square"></i> Font Awesome fontawesome.com -->Informationen aus Schleswig-Holstein</a></li>
+	    <li><a class="extern" href="https://www.gesetze-im-internet.de/bseeschg/BJNR208330965.html" title="Externer Link&nbsp;öffnet die Seite zum Gesetz über die Aufgaben des Bundes auf dem Gebiet der Seeschifffahrt (Öffnet&nbsp;neues&nbsp;Fenster)" target="_blank"><svg class="svg-inline--fa fa-arrow-up-right-from-square" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-up-right-from-square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l82.7 0L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3l0 82.7c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160c0-17.7-14.3-32-32-32L320 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"></path></svg><!-- <i class="fa-solid fa-arrow-up-right-from-square"></i> Font Awesome fontawesome.com -->Seeaufgabengesetz (SeeAufgG)</a></li>
+	  </ul>
+    </div>
+  </div>
+</div>
+
+
+<div class="padding-textbox desktop-no-horizontal-padding">
+  <p>
+    <strong>Hinweis: Bei den Modellvorhersagen handelt es sich nicht um die offiziellen Wasserstandsvorhersagen des BSH!</strong><br>
+    Die Modellvorhersagen sind ein zentrales Instrument zur Erstellung der
+    <a href="https://www.bsh.de/DE/DATEN/Vorhersagen/Wasserstand_Ostsee/wasserstand_ostsee_node.html" style="color: white; text-decoration: underline;">offiziellen Wasserstandsvorhersage</a>
+    und sind hier dargestellt als ergänzende Information zur Einschätzung der aktuellen Lage und Entwicklung. In Einzelfällen können die Modellvorhersagen jedoch Abweichungen aufweisen.
+    Sowohl numerische Modelle als auch Messungen können Unsicherheiten enthalten. Grundsätzlich gilt: Je kürzer der Prognosezeitraum, desto sicherer ist die Modellvorhersage.
+  </p>
+  <p>
+    Die Messwerte als ungeprüfte Rohdaten werden dem BSH von der Generaldirektion Wasserstraßen und Schifffahrt zur Verfügung gestellt.
+    Die Modellergebnisse des <a href="https://www.dmi.dk/friedata/dokumentation/data/forecast-data-storm-surge-model-dkss" style="color: white;text-decoration: underline;">DMI</a>
+    sind Bias-korrigiert und lizenziert unter <a href="https://creativecommons.org/licenses/by/4.0/legalcode.en" style="color: white;text-decoration: underline;">CC BY 4.0</a>
+  </p>
+</div>
+
+
+</div>
+
+<div id="footer" class="py-5">
+<div class="container content-wrapper">
+<div class="row mb-5">
+<div class="col-12 col-md-8 col-lg-7 col-xl-6">
+<div id="footer-bsh" class="row pt-md-2">
+<div id="footer-bsh-adler" class="col-2 col-sm-auto">
+  <img src="aux/bundesadler.svg" alt="Bundesadler">
+</div>
+<div id="footer-bsh-address" class="col pe-4">
+  <p class="small">© Bundesamt für Seeschifffahrt und Hydrographie (BSH)<br>Das BSH übernimmt für die hier angegebenen Informationen keine Gewähr.<br>Amtliche Wasserstandsvorhersage des Bundes gemäß §1 SeeAufG.</p><p class="small">Das Bundesamt für Seeschifffahrt und Hydrographie ist eine Bundesoberbehörde im Geschäftsbereich des Bundesministeriums für Verkehr.</p><p class="small">Bundesamt für Seeschifffahrt und Hydrographie<br>Bernhard-Nocht-Str.&nbsp;78, 20359&nbsp;Hamburg&nbsp;| Neptunallee&nbsp;5, 18057&nbsp;Rostock</p>
+  <p class="small"><a href="https://www.bsh.de" title="BSH-Webseite">https://www.bsh.de</a></p></div></div></div><div class="col-2 d-md-none"></div><div class="col-10 col-md-4 col-lg-5 col-xl-6 p-0 d-print-none row"><div class="col-12 col-sm-7 col-md-12 col-lg-7 text-sm-start ps-xl-5"><ul class="navbar-nav small ps-3 ps-md-0"><li class="nav-item"><a class="nav-link" href="https://www.bsh.de/DE/Service/Impressum/impressum_node.html">Impressum</a></li><li class="nav-item"><a class="nav-link" href="https://www.bsh.de/DE/Service/Datenschutz/datenschutz_node.html">Datenschutz</a></li><li class="nav-item"><a class="nav-link" href="https://www.bsh.de/DE/Service/Barrierefreiheit/barrierefreiheit_node.html">Barrierefreiheit</a></li></ul></div><div class="col-10 col-sm-5 col-md-12 col-lg-5 text-sm-start"><ul class="navbar-nav small ps-3 ps-md-0"><li class="nav-item"><a class="nav-link" href="https://gezeiten.bsh.de">Gezeiten</a></li></ul></div></div></div></div></div>
+
+
+<script>
+  if (window.matchMedia("(min-width: 768px)").matches) {
+    document.getElementById("vorhersage").setAttribute("open", "");
+  }
+  const BREAKPOINT = 768; // max-width für mobile
+  let currentVersion = null; // merkt sich aktuell geladene Version
+
+  function loadPlot() {
+    const container = document.getElementById("plotly-container");
+    const isMobile = window.innerWidth <= BREAKPOINT;
+    const version = isMobile ? "mobile" : "desktop";
+
+    // Prüfen, ob die richtige Version schon geladen ist
+    if (currentVersion === version) return;
+
+    // Alte Version entfernen
+    container.innerHTML = "";
+
+    // Neues Iframe erstellen
+    const iframe = document.createElement("iframe");
+    iframe.src = isMobile 
+      ? "figures/travemuende-wasserstand-mobile.html" 
+      : "figures/travemuende-wasserstand-desktop.html";
+    iframe.style.border = "none";
+    iframe.style.width = "100%";
+    iframe.style.height = isMobile ? "550px" : "650px";
+
+    // Zusätzliche Styles für mobile Version
+    if (isMobile) {
+      iframe.style.marginLeft = "-0.8rem";
+      iframe.style.marginRight = "-0.5rem";
+    }
+
+    container.appendChild(iframe);
+    currentVersion = version;
+  }
+
+  // Initiales Laden
+  window.addEventListener("load", loadPlot);
+
+  // Optional: neu laden bei Resize (mit Debounce)
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(loadPlot, 200); // wartet 200ms nach Resize-Ende
+  });
+</script>
+</body>
+</html>
