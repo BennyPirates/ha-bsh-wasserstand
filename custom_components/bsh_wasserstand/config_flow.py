@@ -17,9 +17,12 @@ from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 from .api import BshClient, BshError, StationNotFound
 from .const import (
+    CONF_DMI,
     CONF_HORIZON,
+    CONF_REFERENCE,
     CONF_SCAN_INTERVAL,
     CONF_STATION,
+    DEFAULT_DMI,
     DEFAULT_HORIZON,
     DEFAULT_SCAN_INTERVAL,
     DEFAULT_STATION,
@@ -130,6 +133,15 @@ class BshOptionsFlow(OptionsFlow):
                             unit_of_measurement="h",
                             mode=selector.NumberSelectorMode.BOX,
                         )
+                    ),
+                    vol.Required(
+                        CONF_DMI, default=options.get(CONF_DMI, DEFAULT_DMI)
+                    ): selector.BooleanSelector(),
+                    vol.Optional(
+                        CONF_REFERENCE,
+                        description={"suggested_value": options.get(CONF_REFERENCE)},
+                    ): selector.LocationSelector(
+                        selector.LocationSelectorConfig(radius=False)
                     ),
                 }
             ),

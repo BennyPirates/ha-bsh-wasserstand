@@ -7,7 +7,7 @@ import json
 import sys
 import types
 import unittest
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -150,6 +150,41 @@ class AlertLevelTest(unittest.TestCase):
         )
         self.assertEqual((level, threshold), (analysis.PREWARNING, 35))
         self.assertTrue(found)
+
+
+class DmiTest(unittest.TestCase):
+    LON, LAT = 10.8721815, 53.9580237
+
+    def test_nearest_wet_node(self) -> None:
+        node = parser.nearest_wet_node(
+            fixture("dmi-cube.json"), self.LON, self.LAT, "sea-mean-deviation"
+        )
+        self.assertAlmostEqual(node[0], 10.86775, places=4)
+        self.assertAlmostEqual(node[1], 53.99540, places=4)
+
+    def test_position(self) -> None:
+        dmi = parser.parse_dmi(
+            fixture("dmi-position.json"), self.LON, self.LAT, "sea-mean-deviation"
+        )
+        self.assertAlmostEqual(dmi.distance_km, 4.17, places=1)
+        first = dmi.points[0]
+        self.assertEqual(first.time, datetime(2026, 10, 18, 0, 0, tzinfo=UTC))
+        self.assertAlmostEqual(first.value, 123.9, places=1)
+
+    def test_land_node(self) -> None:
+        land = {
+            "features": [
+                {
+                    "geometry": {"coordinates": [10.87, 53.96]},
+                    "properties": {
+                        "sea-mean-deviation": None,
+                        "step": "2026-10-18T00:00:00Z",
+                    },
+                }
+            ]
+        }
+        with self.assertRaises(parser.ParseError):
+            parser.parse_dmi(land, self.LON, self.LAT, "sea-mean-deviation")
 
 
 if __name__ == "__main__":

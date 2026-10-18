@@ -12,6 +12,7 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from .const import (
     ATTRIBUTION,
     CONF_HORIZON,
+    CONF_REFERENCE,
     DEFAULT_HORIZON,
     DEFAULT_THRESHOLDS,
     DOMAIN,
@@ -58,3 +59,11 @@ class BshEntity(CoordinatorEntity[BshCoordinator]):
     @property
     def horizon(self) -> timedelta:
         return timedelta(hours=self._entry.options.get(CONF_HORIZON, DEFAULT_HORIZON))
+
+    @property
+    def reference(self) -> tuple[float, float] | None:
+        """Optional reference point (longitude, latitude), e.g. the berth."""
+        point = self._entry.options.get(CONF_REFERENCE)
+        if not point or "latitude" not in point or "longitude" not in point:
+            return None
+        return float(point["longitude"]), float(point["latitude"])

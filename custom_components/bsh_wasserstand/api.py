@@ -7,7 +7,7 @@ from typing import Any
 
 import aiohttp
 
-from .const import AREA_URL, STATION_URL, STATIONS_URL
+from .const import AREA_URL, DMI_PARAMETER, DMI_URL, STATION_URL, STATIONS_URL
 
 TIMEOUT = aiohttp.ClientTimeout(total=60)
 
@@ -46,6 +46,8 @@ class BshClient:
                     return cached.document, False
                 if resp.status == 404:
                     raise StationNotFound(url)
+                if resp.status == 429:
+                    raise BshError(f"{url}: rate limited (HTTP 429)")
                 resp.raise_for_status()
                 document = await resp.json(content_type=None)
                 # Prefer Last-Modified: Apache appends "-gzip" to the ETag of
@@ -67,6 +69,26 @@ class BshClient:
     async def area_table(self, sea: str) -> tuple[Any, bool]:
         """Official forecast table of all areas of one sea."""
         return await self._get(AREA_URL.format(sea=sea))
+
+    async def dmi_cube(
+        self, west: float, south: float, east: float, north: float, step: str
+    ) -> Any:
+        """DMI model values of one time step in a bounding box."""
+        url = (
+            f"{DMI_URL}/cube?bbox={west:.4f},{south:.4f},{east:.4f},{north:.4f}"
+            f"&datetime={step}&parameter-name={DMI_PARAMETER}&f=GeoJSON"
+        )
+        document, _ = await self._get(url)
+        return document
+
+    async def dmi_position(self, lon: float, lat: float) -> Any:
+        """DMI model run at the node nearest to a position."""
+        url = (
+            f"{DMI_URL}/position?coords=POINT({lon:.5f}%20{lat:.5f})"
+            f"&parameter-name={DMI_PARAMETER}&f=GeoJSON"
+        )
+        document, _ = await self._get(url)
+        return document
 
     async def stations(self) -> Any:
         """All stations of the API (large, used by the config flow only)."""

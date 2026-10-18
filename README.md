@@ -32,9 +32,11 @@ converts them to NHN/SKN like the BSH web pages.
 | Warnung / Vorwarnung Hochwasser ab, Niedrigwasser ab | Four threshold numbers (restored after restart) |
 | Warnstufe Hochwasser / Niedrigwasser | Enum `none` / `prewarning` / `warning`: highest level reached by measurement, model forecast or official forecast within the horizon; attributes `threshold`, `first_time`, `peak`, `peak_time`, `sources` |
 | Hochwasser erwartet / Niedrigwasser erwartet | On when the warning threshold is reached: the measurement, the model forecast or the official forecast reaches the threshold within the horizon; attributes `first_time`, `peak`, `sources` |
+| Höchststand / Tiefststand Vorhersage DMI | Optional second opinion: DMI storm surge model (DKSS, ~0.9 km grid, CC BY 4.0) at the nearest model node with water, fetched hourly; not used for alert levels |
+| Entfernung Bezugspunkt zum Pegel / DMI-Modellpunkt | Distances from an optional reference point (e.g. the berth) set in the options |
 | Datenproblem | On when a download/parse failed or the latest measurement is older than 3 h |
 
-Options: polling interval, horizon (default 72 h).
+Options: polling interval, horizon (default 72 h), DMI second opinion (default on), reference point.
 
 ## Installation
 

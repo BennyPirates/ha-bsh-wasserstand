@@ -24,10 +24,14 @@
         "title": "Einstellungen",
         "data": {
           "scan_interval": "Abrufintervall",
-          "horizon": "Vorhersagehorizont für Extremwerte und Warnungen"
+          "horizon": "Vorhersagehorizont für Extremwerte und Warnungen",
+          "dmi": "DMI-Sturmflutmodell als Zweitmeinung laden",
+          "reference": "Bezugspunkt (z. B. Liegeplatz)"
         },
         "data_description": {
-          "scan_interval": "Die Messwerte werden alle 15 min aktualisiert."
+          "scan_interval": "Die Messwerte werden alle 15 min aktualisiert.",
+          "dmi": "Nächster Modellpunkt mit Wasser, stündlich abgerufen. Fließt nicht in die Warnstufen ein.",
+          "reference": "Optional. Zeigt, wie weit Pegel und DMI-Modellpunkt davon entfernt sind."
         }
       }
     }
@@ -73,6 +77,18 @@
           "prewarning": "Vorwarnung",
           "warning": "Warnung"
         }
+      },
+      "dmi_high": {
+        "name": "Höchststand Vorhersage DMI"
+      },
+      "dmi_low": {
+        "name": "Tiefststand Vorhersage DMI"
+      },
+      "reference_distance_gauge": {
+        "name": "Entfernung Bezugspunkt zum Pegel"
+      },
+      "reference_distance_dmi": {
+        "name": "Entfernung Bezugspunkt zum DMI-Modellpunkt"
       }
     },
     "binary_sensor": {

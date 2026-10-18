@@ -24,10 +24,14 @@
         "title": "Settings",
         "data": {
           "scan_interval": "Polling interval",
-          "horizon": "Forecast horizon for extremes and alerts"
+          "horizon": "Forecast horizon for extremes and alerts",
+          "dmi": "Load DMI storm surge model as second opinion",
+          "reference": "Reference point (e.g. berth)"
         },
         "data_description": {
-          "scan_interval": "Measurements are updated every 15 minutes."
+          "scan_interval": "Measurements are updated every 15 minutes.",
+          "dmi": "Nearest model node with water, fetched hourly. Not used for alert levels.",
+          "reference": "Optional. Shows how far the gauge and the DMI model node are away."
         }
       }
     }
@@ -73,6 +77,18 @@
           "prewarning": "Pre-warning",
           "warning": "Warning"
         }
+      },
+      "dmi_high": {
+        "name": "Forecast high DMI"
+      },
+      "dmi_low": {
+        "name": "Forecast low DMI"
+      },
+      "reference_distance_gauge": {
+        "name": "Distance reference to gauge"
+      },
+      "reference_distance_dmi": {
+        "name": "Distance reference to DMI model node"
       }
     },
     "binary_sensor": {

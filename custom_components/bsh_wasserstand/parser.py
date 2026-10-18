@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any
@@ -52,6 +53,18 @@ class Station:
     references: dict[str, float]
     warning: str | None
     text: str | None
+    longitude: float | None = None
+    latitude: float | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class DmiForecast:
+    """DMI storm surge model run at one grid node."""
+
+    longitude: float
+    latitude: float
+    distance_km: float
+    points: list[Point]
 
 
 @dataclass(frozen=True, slots=True)
@@ -61,6 +74,7 @@ class WaterLevelData:
     station: Station | None
     official: OfficialForecast | None
     errors: list[str] = field(default_factory=list)
+    dmi: DmiForecast | None = None
 
 
 def _time(raw: object) -> datetime | None:
@@ -125,6 +139,8 @@ def parse_station(document: dict[str, Any]) -> Station:
         references=references,
         warning=props.get("official_warning_level_region"),
         text=_text(props.get("forecast_text")),
+        longitude=_number(props.get("longitude")),
+        latitude=_number(props.get("latitude")),
     )
 
 
@@ -171,3 +187,57 @@ def parse_stations(document: dict[str, Any]) -> dict[str, str]:
             label = (feature.get("properties") or {}).get("gauge_label")
             stations[str(feature["id"])] = str(label or feature["id"])
     return stations
+
+
+def distance_km(lon1: float, lat1: float, lon2: float, lat2: float) -> float:
+    """Great circle distance."""
+    p1, p2 = math.radians(lat1), math.radians(lat2)
+    dp, dl = p2 - p1, math.radians(lon2 - lon1)
+    a = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
+    return 2 * 6371.0 * math.asin(math.sqrt(a))
+
+
+def _dmi_features(document: dict[str, Any]) -> list[tuple[float, float, Any]]:
+    result = []
+    for feature in document.get("features", []):
+        coords = (feature.get("geometry") or {}).get("coordinates") or []
+        if len(coords) >= 2:
+            result.append(
+                (float(coords[0]), float(coords[1]), feature.get("properties") or {})
+            )
+    return result
+
+
+def nearest_wet_node(
+    document: dict[str, Any], lon: float, lat: float, parameter: str
+) -> tuple[float, float] | None:
+    """Nearest model node with a value in a DMI cube (GeoJSON) response."""
+    wet = [
+        (x, y)
+        for x, y, props in _dmi_features(document)
+        if props.get(parameter) is not None
+    ]
+    if not wet:
+        return None
+    return min(wet, key=lambda node: distance_km(lon, lat, node[0], node[1]))
+
+
+def parse_dmi(
+    document: dict[str, Any], lon: float, lat: float, parameter: str
+) -> DmiForecast:
+    """Parse a DMI position query (GeoJSON, metres) into cm NHN."""
+    features = _dmi_features(document)
+    points = [
+        Point(_time(props.get("step")), float(props[parameter]) * 100)  # type: ignore[arg-type]
+        for _, _, props in features
+        if props.get(parameter) is not None and props.get("step")
+    ]
+    if not points:
+        raise ParseError("DMI node has no water level values")
+    node_lon, node_lat = features[0][0], features[0][1]
+    return DmiForecast(
+        longitude=node_lon,
+        latitude=node_lat,
+        distance_km=round(distance_km(lon, lat, node_lon, node_lat), 2),
+        points=sorted(points, key=lambda p: p.time),
+    )

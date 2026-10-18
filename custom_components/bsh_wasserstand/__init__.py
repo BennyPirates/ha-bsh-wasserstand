@@ -16,8 +16,8 @@ from .entity import BshConfigEntry, BshRuntime
 
 PLATFORMS = [Platform.BINARY_SENSOR, Platform.NUMBER, Platform.SENSOR]
 
-# Model figure entities of v0.1 that the API does not provide.
-_REMOVED_KEYS = ("dmi_high", "dmi_low", "band_high", "band_low")
+# Uncertainty band entities of v0.1 that no data source provides any more.
+_REMOVED_KEYS = ("band_high", "band_low")
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: BshConfigEntry) -> bool:
