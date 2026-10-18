@@ -41,6 +41,9 @@ HACS → Custom repositories → `https://github.com/BennyPirates/ha-bsh-wassers
 
 ## Example forecast chart
 
+Entity IDs depend on the Home Assistant language at setup time; the examples
+use an English installation.
+
 With [apexcharts-card](https://github.com/RomRider/apexcharts-card):
 
 ```yaml
@@ -54,11 +57,11 @@ series:
   - entity: sensor.pegel_travemunde_wasserstand
     name: Messung
     stroke_width: 2
-  - entity: sensor.pegel_travemunde_hochststand_vorhersage_bsh
+  - entity: sensor.pegel_travemunde_forecast_high_bsh
     name: BSH
     data_generator: |
       return entity.attributes.forecast.map(p => [new Date(p.time).getTime(), p.value]);
-  - entity: sensor.pegel_travemunde_hochststand_vorhersage_dmi
+  - entity: sensor.pegel_travemunde_forecast_high_dmi
     name: DMI
     data_generator: |
       return entity.attributes.forecast.map(p => [new Date(p.time).getTime(), p.value]);
