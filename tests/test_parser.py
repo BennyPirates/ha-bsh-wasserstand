@@ -119,7 +119,15 @@ class AnalysisTest(unittest.TestCase):
         found = analysis.crossings(self.data, NOW, 100, analysis.HIGH)
         sources = {c.source for c in found}
         self.assertIn("observation", sources)
-        self.assertIn("official: Bis Sonntag Abend", sources)
+        # The running official period ("Bis Sonntag Abend" up to +115) is
+        # covered by measurement and model and must not hold an alert.
+        self.assertFalse(any(s.startswith("official") for s in sources))
+
+    def test_later_official_period(self) -> None:
+        found = analysis.crossings(self.data, NOW, 60, analysis.HIGH)
+        official = [c for c in found if c.source.startswith("official")]
+        self.assertEqual([c.label for c in official], ["Sonntag in der Nacht"])
+        self.assertEqual(official[0].value, 65)
 
     def test_no_crossing(self) -> None:
         self.assertEqual(analysis.crossings(self.data, NOW, 300, analysis.HIGH), [])
@@ -138,10 +146,25 @@ class AlertLevelTest(unittest.TestCase):
         self.assertEqual(self.level(), analysis.NONE)
 
     def test_prewarning(self) -> None:
-        self.assertEqual(self.level(high_pre=110), analysis.PREWARNING)
+        self.assertEqual(self.level(high_pre=100), analysis.PREWARNING)
 
     def test_warning_wins(self) -> None:
-        self.assertEqual(self.level(high=110, high_pre=90), analysis.WARNING)
+        self.assertEqual(self.level(high=100, high_pre=90), analysis.WARNING)
+
+    def test_hysteresis_keeps_level(self) -> None:
+        latest = self.data.station.observations[-1].value
+        values = {"high": 300, "high_pre": latest + 3, "low": -300, "low_pre": -300}
+        level = analysis.alert_level(self.data, NOW, values, analysis.HIGH)[0]
+        self.assertEqual(level, analysis.NONE)
+        level = analysis.alert_level(
+            self.data, NOW, values, analysis.HIGH, previous=analysis.PREWARNING
+        )[0]
+        self.assertEqual(level, analysis.PREWARNING)
+        values["high_pre"] = latest + 10
+        level = analysis.alert_level(
+            self.data, NOW, values, analysis.HIGH, previous=analysis.PREWARNING
+        )[0]
+        self.assertEqual(level, analysis.NONE)
 
     def test_low_side(self) -> None:
         values = {"high": 300, "high_pre": 300, "low": 0, "low_pre": 35}

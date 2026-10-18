@@ -30,7 +30,7 @@ converts them to NHN/SKN like the BSH web pages.
 | Offizielle Vorhersage | First period as text, all periods in `periods` and `summary`, `warning`, `text` |
 | Offizielle Vorhersage Höchstwert / Tiefstwert | Extremes of the official table (Baltic Sea) |
 | Warnung / Vorwarnung Hochwasser ab, Niedrigwasser ab | Four threshold numbers (restored after restart) |
-| Warnstufe Hochwasser / Niedrigwasser | Enum `none` / `prewarning` / `warning`: highest level reached by measurement, model forecast or official forecast within the horizon; attributes `threshold`, `first_time`, `peak`, `peak_time`, `sources` |
+| Warnstufe Hochwasser / Niedrigwasser | Enum `none` / `prewarning` / `warning`: highest level reached by measurement, model forecast or a later official period (the running official period is covered by measurement and model) within the horizon, with 5 cm hysteresis when falling; attribute `details` per source; attributes `threshold`, `first_time`, `peak`, `peak_time`, `sources` |
 | Hochwasser erwartet / Niedrigwasser erwartet | On when the warning threshold is reached: the measurement, the model forecast or the official forecast reaches the threshold within the horizon; attributes `first_time`, `peak`, `sources` |
 | Höchststand / Tiefststand Vorhersage DMI | Optional second opinion: DMI storm surge model (DKSS, ~0.9 km grid, CC BY 4.0) at the nearest model node with water, fetched hourly; not used for alert levels |
 | Entfernung Bezugspunkt zum Pegel / DMI-Modellpunkt | Distances from an optional reference point (e.g. the berth) set in the options |

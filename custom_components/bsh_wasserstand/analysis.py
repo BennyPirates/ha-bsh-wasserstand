@@ -18,6 +18,8 @@ class Crossing:
     source: str
     first: Point | None
     extreme: Point | None
+    label: str | None = None
+    value: float | None = None
 
 
 def upcoming(
@@ -61,10 +63,17 @@ def crossings(
             found.append(Crossing("forecast", hits[0], extreme(hits, kind)))
 
     if data.official:
-        for period in data.official.periods:
+        # The running period also contains the past hours of the day (e.g. a
+        # surge peak that is already over); measurement and model cover it in
+        # 15-minute steps, so only later official periods can raise an alert.
+        for period in data.official.periods[1:]:
             value = period.upper if kind == HIGH else period.lower
             if hit(value):
-                found.append(Crossing(f"official: {period.label}", None, None))
+                found.append(
+                    Crossing(
+                        f"official: {period.label}", None, None, period.label, value
+                    )
+                )
     return found
 
 
@@ -74,18 +83,32 @@ WARNING = "warning"
 LEVELS = [NONE, PREWARNING, WARNING]
 
 
+HYSTERESIS = 5.0
+
+
 def alert_level(
     data: WaterLevelData,
     now: datetime,
     thresholds: dict[str, float],
     kind: str,
     horizon: timedelta | None = None,
+    previous: str | None = None,
+    hysteresis: float = HYSTERESIS,
 ) -> tuple[str, float | None, list[Crossing]]:
-    """Highest alert level reached, its threshold and the sources reaching it."""
-    for level, key in ((WARNING, kind), (PREWARNING, f"{kind}_pre")):
+    """Highest alert level reached, its threshold and the sources reaching it.
+
+    A level only drops once no source is within `hysteresis` cm of its
+    threshold any more, so values around a threshold do not flap.
+    """
+    levels = ((WARNING, kind), (PREWARNING, f"{kind}_pre"))
+    for level, key in levels:
         threshold = thresholds[key]
         if found := crossings(data, now, threshold, kind, horizon):
             return level, threshold, found
+        if level == previous:
+            relaxed = threshold - hysteresis if kind == HIGH else threshold + hysteresis
+            if found := crossings(data, now, relaxed, kind, horizon):
+                return level, threshold, found
     return NONE, None, []
 
 
@@ -102,4 +125,14 @@ def describe(found: list[Crossing], kind: str) -> dict[str, object]:
         "first_source": first.source if first else None,
         "peak": round(peak.value, 1) if peak else None,
         "peak_time": peak.time.isoformat() if peak else None,
+        "details": [
+            {
+                "source": c.source,
+                "first_time": c.first.time.isoformat() if c.first else None,
+                "peak": round(c.extreme.value, 1) if c.extreme else c.value,
+                "peak_time": c.extreme.time.isoformat() if c.extreme else None,
+                "label": c.label,
+            }
+            for c in found
+        ],
     }

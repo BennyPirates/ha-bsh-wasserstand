@@ -294,6 +294,7 @@ class AlertLevelSensor(BshEntity, SensorEntity):
     def __init__(self, entry: BshConfigEntry, kind: str) -> None:
         super().__init__(entry, f"{kind}_alert")
         self._kind = kind
+        self._previous: str | None = None
 
     @property
     def _level(self) -> tuple[str, float | None, list[Crossing]]:
@@ -303,11 +304,17 @@ class AlertLevelSensor(BshEntity, SensorEntity):
             self._runtime.thresholds,
             self._kind,
             self.horizon,
+            self._previous,
         )
 
     @property
     def native_value(self) -> str:
         return self._level[0]
+
+    def _handle_coordinator_update(self) -> None:
+        # Remember the published level for the hysteresis of the next update.
+        self._previous = self._level[0]
+        super()._handle_coordinator_update()
 
     @property
     def extra_state_attributes(self) -> dict[str, Any]:
