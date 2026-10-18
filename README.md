@@ -29,8 +29,9 @@ converts them to NHN/SKN like the BSH web pages.
 | Höchststand / Tiefststand Vorhersage | Extremes of the BSH model forecast within the horizon with `time`; the high sensor has a `forecast` attribute (15-minute values) |
 | Offizielle Vorhersage | First period as text, all periods in `periods` and `summary`, `warning`, `text` |
 | Offizielle Vorhersage Höchstwert / Tiefstwert | Extremes of the official table (Baltic Sea) |
-| Warnschwelle Hochwasser / Niedrigwasser | Number entities (restored after restart) |
-| Hochwasser erwartet / Niedrigwasser erwartet | On when the measurement, the model forecast or the official forecast reaches the threshold within the horizon; attributes `first_time`, `peak`, `sources` |
+| Warnung / Vorwarnung Hochwasser ab, Niedrigwasser ab | Four threshold numbers (restored after restart) |
+| Warnstufe Hochwasser / Niedrigwasser | Enum `none` / `prewarning` / `warning`: highest level reached by measurement, model forecast or official forecast within the horizon; attributes `threshold`, `first_time`, `peak`, `peak_time`, `sources` |
+| Hochwasser erwartet / Niedrigwasser erwartet | On when the warning threshold is reached: the measurement, the model forecast or the official forecast reaches the threshold within the horizon; attributes `first_time`, `peak`, `sources` |
 | Datenproblem | On when a download/parse failed or the latest measurement is older than 3 h |
 
 Options: polling interval, horizon (default 72 h).

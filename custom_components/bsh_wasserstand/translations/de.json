@@ -57,6 +57,22 @@
       },
       "forecast_run": {
         "name": "Modellvorhersage erstellt"
+      },
+      "high_alert": {
+        "name": "Warnstufe Hochwasser",
+        "state": {
+          "none": "Keine",
+          "prewarning": "Vorwarnung",
+          "warning": "Warnung"
+        }
+      },
+      "low_alert": {
+        "name": "Warnstufe Niedrigwasser",
+        "state": {
+          "none": "Keine",
+          "prewarning": "Vorwarnung",
+          "warning": "Warnung"
+        }
       }
     },
     "binary_sensor": {
@@ -72,10 +88,16 @@
     },
     "number": {
       "high_threshold": {
-        "name": "Warnschwelle Hochwasser"
+        "name": "Warnung Hochwasser ab"
       },
       "low_threshold": {
-        "name": "Warnschwelle Niedrigwasser"
+        "name": "Warnung Niedrigwasser ab"
+      },
+      "high_prewarning_threshold": {
+        "name": "Vorwarnung Hochwasser ab"
+      },
+      "low_prewarning_threshold": {
+        "name": "Vorwarnung Niedrigwasser ab"
       }
     }
   }

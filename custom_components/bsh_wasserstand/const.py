@@ -21,7 +21,7 @@ DEFAULT_SCAN_INTERVAL = 15
 MIN_SCAN_INTERVAL = 5
 DEFAULT_HORIZON = 72
 
-DEFAULT_HIGH_THRESHOLD = 100
-DEFAULT_LOW_THRESHOLD = -50
+# Alert thresholds in cm NHN, keyed by "<kind>" (warning) and "<kind>_pre".
+DEFAULT_THRESHOLDS = {"high": 100, "high_pre": 80, "low": -50, "low_pre": -30}
 
 ATTRIBUTION = "Daten: Bundesamt für Seeschifffahrt und Hydrographie (BSH), CC BY 4.0"

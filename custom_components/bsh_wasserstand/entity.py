@@ -9,13 +9,11 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.device_registry import DeviceEntryType, DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .analysis import HIGH, LOW
 from .const import (
     ATTRIBUTION,
     CONF_HORIZON,
-    DEFAULT_HIGH_THRESHOLD,
     DEFAULT_HORIZON,
-    DEFAULT_LOW_THRESHOLD,
+    DEFAULT_THRESHOLDS,
     DOMAIN,
     PAGE_URL,
 )
@@ -28,10 +26,7 @@ class BshRuntime:
 
     coordinator: BshCoordinator
     thresholds: dict[str, float] = field(
-        default_factory=lambda: {
-            HIGH: DEFAULT_HIGH_THRESHOLD,
-            LOW: DEFAULT_LOW_THRESHOLD,
-        }
+        default_factory=lambda: dict(DEFAULT_THRESHOLDS)
     )
 
 

@@ -15,7 +15,16 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.util import dt as dt_util
 
-from .analysis import HIGH, LOW, extreme, upcoming
+from .analysis import (
+    HIGH,
+    LEVELS,
+    LOW,
+    Crossing,
+    alert_level,
+    describe,
+    extreme,
+    upcoming,
+)
 from .entity import BshConfigEntry, BshEntity
 from .parser import Point
 
@@ -36,6 +45,8 @@ async def async_setup_entry(
             OfficialExtremeSensor(entry, LOW),
             OfficialIssuedSensor(entry),
             ForecastRunSensor(entry),
+            AlertLevelSensor(entry, HIGH),
+            AlertLevelSensor(entry, LOW),
         ]
     )
 
@@ -228,3 +239,38 @@ class ForecastRunSensor(BshEntity, SensorEntity):
     def native_value(self) -> datetime | None:
         station = self.coordinator.data.station
         return station.forecast_run if station else None
+
+
+class AlertLevelSensor(BshEntity, SensorEntity):
+    """Two-stage alert level: none, pre-warning or warning."""
+
+    _attr_device_class = SensorDeviceClass.ENUM
+    _attr_options = LEVELS
+
+    def __init__(self, entry: BshConfigEntry, kind: str) -> None:
+        super().__init__(entry, f"{kind}_alert")
+        self._kind = kind
+
+    @property
+    def _level(self) -> tuple[str, float | None, list[Crossing]]:
+        return alert_level(
+            self.coordinator.data,
+            dt_util.now(),
+            self._runtime.thresholds,
+            self._kind,
+            self.horizon,
+        )
+
+    @property
+    def native_value(self) -> str:
+        return self._level[0]
+
+    @property
+    def extra_state_attributes(self) -> dict[str, Any]:
+        _, threshold, found = self._level
+        thresholds = self._runtime.thresholds
+        return {
+            "threshold": threshold,
+            "warning_threshold": thresholds[self._kind],
+            "prewarning_threshold": thresholds[f"{self._kind}_pre"],
+        } | describe(found, self._kind)

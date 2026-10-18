@@ -57,6 +57,22 @@
       },
       "forecast_run": {
         "name": "Model forecast issued"
+      },
+      "high_alert": {
+        "name": "High water alert level",
+        "state": {
+          "none": "None",
+          "prewarning": "Pre-warning",
+          "warning": "Warning"
+        }
+      },
+      "low_alert": {
+        "name": "Low water alert level",
+        "state": {
+          "none": "None",
+          "prewarning": "Pre-warning",
+          "warning": "Warning"
+        }
       }
     },
     "binary_sensor": {
@@ -72,10 +88,16 @@
     },
     "number": {
       "high_threshold": {
-        "name": "High water threshold"
+        "name": "High water warning threshold"
       },
       "low_threshold": {
-        "name": "Low water threshold"
+        "name": "Low water warning threshold"
+      },
+      "high_prewarning_threshold": {
+        "name": "High water pre-warning threshold"
+      },
+      "low_prewarning_threshold": {
+        "name": "Low water pre-warning threshold"
       }
     }
   }

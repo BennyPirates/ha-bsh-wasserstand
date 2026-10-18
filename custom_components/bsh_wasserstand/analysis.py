@@ -66,3 +66,40 @@ def crossings(
             if hit(value):
                 found.append(Crossing(f"official: {period.label}", None, None))
     return found
+
+
+NONE = "none"
+PREWARNING = "prewarning"
+WARNING = "warning"
+LEVELS = [NONE, PREWARNING, WARNING]
+
+
+def alert_level(
+    data: WaterLevelData,
+    now: datetime,
+    thresholds: dict[str, float],
+    kind: str,
+    horizon: timedelta | None = None,
+) -> tuple[str, float | None, list[Crossing]]:
+    """Highest alert level reached, its threshold and the sources reaching it."""
+    for level, key in ((WARNING, kind), (PREWARNING, f"{kind}_pre")):
+        threshold = thresholds[key]
+        if found := crossings(data, now, threshold, kind, horizon):
+            return level, threshold, found
+    return NONE, None, []
+
+
+def describe(found: list[Crossing], kind: str) -> dict[str, object]:
+    """Common attributes: first time the threshold is reached and the peak."""
+    timed = [c for c in found if c.first]
+    first = min(timed, key=lambda c: c.first.time) if timed else None  # type: ignore[union-attr]
+    peaks = [c.extreme for c in found if c.extreme]
+    pick = max if kind == HIGH else min
+    peak = pick(peaks, key=lambda p: p.value) if peaks else None
+    return {
+        "sources": [c.source for c in found],
+        "first_time": first.first.time.isoformat() if first and first.first else None,
+        "first_source": first.source if first else None,
+        "peak": round(peak.value, 1) if peak else None,
+        "peak_time": peak.time.isoformat() if peak else None,
+    }

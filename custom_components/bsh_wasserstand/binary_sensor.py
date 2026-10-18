@@ -14,7 +14,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.util import dt as dt_util
 
-from .analysis import HIGH, LOW, Crossing, crossings
+from .analysis import HIGH, LOW, Crossing, crossings, describe
 from .entity import BshConfigEntry, BshEntity
 
 STALE_AFTER = timedelta(hours=3)
@@ -60,22 +60,7 @@ class AlertSensor(BshEntity, BinarySensorEntity):
 
     @property
     def extra_state_attributes(self) -> dict[str, Any]:
-        found = self._crossings
-        timed = [c for c in found if c.first]
-        first = min(timed, key=lambda c: c.first.time) if timed else None  # type: ignore[union-attr]
-        peaks = [c.extreme for c in found if c.extreme]
-        pick = max if self._kind == HIGH else min
-        peak = pick(peaks, key=lambda p: p.value) if peaks else None
-        return {
-            "threshold": self._threshold,
-            "sources": [c.source for c in found],
-            "first_time": first.first.time.isoformat()
-            if first and first.first
-            else None,
-            "first_source": first.source if first else None,
-            "peak": round(peak.value, 1) if peak else None,
-            "peak_time": peak.time.isoformat() if peak else None,
-        }
+        return {"threshold": self._threshold} | describe(self._crossings, self._kind)
 
 
 class DataProblemSensor(BshEntity, BinarySensorEntity):

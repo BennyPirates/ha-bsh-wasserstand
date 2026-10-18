@@ -125,5 +125,32 @@ class AnalysisTest(unittest.TestCase):
         self.assertEqual(analysis.crossings(self.data, NOW, 300, analysis.HIGH), [])
 
 
+class AlertLevelTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.data = load_data()
+
+    def level(self, **thresholds: float) -> str:
+        values = {"high": 300, "high_pre": 300, "low": -300, "low_pre": -300}
+        values.update(thresholds)
+        return analysis.alert_level(self.data, NOW, values, analysis.HIGH)[0]
+
+    def test_none(self) -> None:
+        self.assertEqual(self.level(), analysis.NONE)
+
+    def test_prewarning(self) -> None:
+        self.assertEqual(self.level(high_pre=110), analysis.PREWARNING)
+
+    def test_warning_wins(self) -> None:
+        self.assertEqual(self.level(high=110, high_pre=90), analysis.WARNING)
+
+    def test_low_side(self) -> None:
+        values = {"high": 300, "high_pre": 300, "low": 0, "low_pre": 35}
+        level, threshold, found = analysis.alert_level(
+            self.data, NOW, values, analysis.LOW
+        )
+        self.assertEqual((level, threshold), (analysis.PREWARNING, 35))
+        self.assertTrue(found)
+
+
 if __name__ == "__main__":
     unittest.main()
