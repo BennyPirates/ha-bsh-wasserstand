@@ -15,8 +15,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.util import dt as dt_util
 
-from .analysis import HIGH, LOW, extreme, hourly, model_series, upcoming
-from .const import MODELS
+from .analysis import HIGH, LOW, extreme, upcoming
 from .entity import BshConfigEntry, BshEntity
 from .parser import Point
 
@@ -27,25 +26,26 @@ async def async_setup_entry(
     async_add_entities: AddConfigEntryEntitiesCallback,
 ) -> None:
     """Create the sensors of one gauge."""
-    entities: list[SensorEntity] = [WaterLevelSensor(entry)]
-    for model in MODELS:
-        entities += [
-            ModelExtremeSensor(entry, model, HIGH),
-            ModelExtremeSensor(entry, model, LOW),
+    async_add_entities(
+        [
+            WaterLevelSensor(entry),
+            ForecastExtremeSensor(entry, HIGH),
+            ForecastExtremeSensor(entry, LOW),
+            OfficialForecastSensor(entry),
+            OfficialExtremeSensor(entry, HIGH),
+            OfficialExtremeSensor(entry, LOW),
+            OfficialIssuedSensor(entry),
+            ForecastRunSensor(entry),
         ]
-    entities += [
-        BandExtremeSensor(entry, HIGH),
-        BandExtremeSensor(entry, LOW),
-        OfficialForecastSensor(entry),
-        OfficialExtremeSensor(entry, HIGH),
-        OfficialExtremeSensor(entry, LOW),
-        OfficialIssuedSensor(entry),
-    ]
-    async_add_entities(entities)
+    )
 
 
 def _iso(value: datetime | None) -> str | None:
     return value.isoformat() if value else None
+
+
+def _series(points: list[Point]) -> list[dict[str, Any]]:
+    return [{"time": p.time.isoformat(), "value": round(p.value, 1)} for p in points]
 
 
 class LevelSensor(BshEntity, SensorEntity):
@@ -60,14 +60,15 @@ class WaterLevelSensor(LevelSensor):
     """Latest measured water level."""
 
     _attr_state_class = SensorStateClass.MEASUREMENT
+    _unrecorded_attributes = frozenset({"history"})
 
     def __init__(self, entry: BshConfigEntry) -> None:
         super().__init__(entry, "water_level")
 
     @property
     def _latest(self) -> Point | None:
-        figure = self.coordinator.data.figure
-        return figure.observations[-1] if figure and figure.observations else None
+        station = self.coordinator.data.station
+        return station.observations[-1] if station and station.observations else None
 
     @property
     def native_value(self) -> float | None:
@@ -75,29 +76,33 @@ class WaterLevelSensor(LevelSensor):
 
     @property
     def extra_state_attributes(self) -> dict[str, Any]:
-        figure = self.coordinator.data.figure
+        station = self.coordinator.data.station
         attrs: dict[str, Any] = {
             "measured_at": _iso(self._latest.time) if self._latest else None
         }
-        if figure:
-            attrs.update({k.lower(): v for k, v in figure.references.items()})
+        if station:
+            attrs.update({k.lower(): v for k, v in station.references.items()})
+            attrs["warning_level"] = station.warning
+            attrs["history"] = _series(station.observations)
         return attrs
 
 
-class ModelExtremeSensor(LevelSensor):
-    """Highest or lowest value of one model run within the horizon."""
+class ForecastExtremeSensor(LevelSensor):
+    """Highest or lowest value of the BSH model forecast within the horizon."""
 
     _unrecorded_attributes = frozenset({"forecast"})
 
-    def __init__(self, entry: BshConfigEntry, model: str, kind: str) -> None:
-        super().__init__(entry, f"{model}_{kind}")
-        self._model = model
+    def __init__(self, entry: BshConfigEntry, kind: str) -> None:
+        # Keys kept from v0.1 so entity IDs stay stable.
+        super().__init__(entry, f"bsh_{kind}")
         self._kind = kind
 
     @property
     def _upcoming(self) -> list[Point]:
-        series = model_series(self.coordinator.data, self._model)
-        return upcoming(series, dt_util.now(), self.horizon)
+        station = self.coordinator.data.station
+        if station is None:
+            return []
+        return upcoming(station.forecast, dt_util.now(), self.horizon)
 
     @property
     def available(self) -> bool:
@@ -110,77 +115,21 @@ class ModelExtremeSensor(LevelSensor):
 
     @property
     def extra_state_attributes(self) -> dict[str, Any]:
-        data = self.coordinator.data
+        station = self.coordinator.data.station
         point = extreme(self._upcoming, self._kind)
         attrs: dict[str, Any] = {
             "time": _iso(point.time) if point else None,
-            "model_run": data.figure.models[self._model].run
-            if data.figure and self._model in data.figure.models
-            else None,
+            "model_run": _iso(station.forecast_run) if station else None,
         }
         if self._kind == HIGH:
-            band = {
-                b.time: b
-                for b in (
-                    data.figure.models[self._model].band
-                    if data.figure and self._model in data.figure.models
-                    else []
-                )
-            }
-            attrs["forecast"] = [
-                {
-                    "time": p.time.isoformat(),
-                    "value": round(p.value, 1),
-                    "lower": round(band[p.time].lower, 1) if p.time in band else None,
-                    "upper": round(band[p.time].upper, 1) if p.time in band else None,
-                }
-                for p in hourly(self._upcoming)
-            ]
+            attrs["forecast"] = _series(self._upcoming)
         return attrs
 
 
-class BandExtremeSensor(LevelSensor):
-    """Most extreme value including the uncertainty band of all models."""
-
-    def __init__(self, entry: BshConfigEntry, kind: str) -> None:
-        super().__init__(entry, f"band_{kind}")
-        self._kind = kind
-
-    @property
-    def _best(self) -> tuple[str, Point] | None:
-        now = dt_util.now()
-        found = []
-        for model in MODELS:
-            series = model_series(self.coordinator.data, model, self._kind)
-            if point := extreme(upcoming(series, now, self.horizon), self._kind):
-                found.append((model, point))
-        if not found:
-            return None
-        pick = max if self._kind == HIGH else min
-        return pick(found, key=lambda item: item[1].value)
-
-    @property
-    def available(self) -> bool:
-        return super().available and self._best is not None
-
-    @property
-    def native_value(self) -> float | None:
-        best = self._best
-        return round(best[1].value, 1) if best else None
-
-    @property
-    def extra_state_attributes(self) -> dict[str, Any]:
-        best = self._best
-        return {
-            "time": _iso(best[1].time) if best else None,
-            "model": MODELS[best[0]] if best else None,
-        }
-
-
 class OfficialForecastSensor(BshEntity, SensorEntity):
-    """Official forecast text of the BSH water level service."""
+    """Official forecast of the BSH water level service."""
 
-    _unrecorded_attributes = frozenset({"periods"})
+    _unrecorded_attributes = frozenset({"periods", "text"})
 
     def __init__(self, entry: BshConfigEntry) -> None:
         super().__init__(entry, "official")
@@ -206,7 +155,8 @@ class OfficialForecastSensor(BshEntity, SensorEntity):
         return {
             "area": official.area,
             "issued": _iso(official.issued),
-            "notice": official.notice,
+            "warning": official.warning,
+            "text": official.text,
             "periods": [
                 {"label": p.label, "lower": p.lower, "upper": p.upper}
                 for p in official.periods
@@ -263,3 +213,18 @@ class OfficialIssuedSensor(BshEntity, SensorEntity):
     def native_value(self) -> datetime | None:
         official = self.coordinator.data.official
         return official.issued if official else None
+
+
+class ForecastRunSensor(BshEntity, SensorEntity):
+    """Time of the automated model forecast."""
+
+    _attr_device_class = SensorDeviceClass.TIMESTAMP
+    _attr_entity_category = EntityCategory.DIAGNOSTIC
+
+    def __init__(self, entry: BshConfigEntry) -> None:
+        super().__init__(entry, "forecast_run")
+
+    @property
+    def native_value(self) -> datetime | None:
+        station = self.coordinator.data.station
+        return station.forecast_run if station else None

@@ -51,7 +51,6 @@ class AlertSensor(BshEntity, BinarySensorEntity):
             dt_util.now(),
             self._threshold,
             self._kind,
-            self.use_band,
             self.horizon,
         )
 
@@ -69,7 +68,6 @@ class AlertSensor(BshEntity, BinarySensorEntity):
         peak = pick(peaks, key=lambda p: p.value) if peaks else None
         return {
             "threshold": self._threshold,
-            "uses_uncertainty_band": self.use_band,
             "sources": [c.source for c in found],
             "first_time": first.first.time.isoformat()
             if first and first.first
@@ -98,9 +96,9 @@ class DataProblemSensor(BshEntity, BinarySensorEntity):
             return ["update failed"]
         data = self.coordinator.data
         reasons = list(data.errors)
-        figure = data.figure
-        if figure and figure.observations:
-            age = dt_util.now() - figure.observations[-1].time
+        station = data.station
+        if station and station.observations:
+            age = dt_util.now() - station.observations[-1].time
             if age > STALE_AFTER:
                 reasons.append(f"latest measurement is {age} old")
         return reasons

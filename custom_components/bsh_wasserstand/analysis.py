@@ -36,29 +36,11 @@ def extreme(points: list[Point], kind: str) -> Point | None:
     return pick(points, key=lambda p: p.value)
 
 
-def hourly(points: list[Point]) -> list[Point]:
-    """Keep full-hour points to make attributes compact."""
-    return [p for p in points if p.time.minute == 0]
-
-
-def model_series(
-    data: WaterLevelData, model: str, bound: str | None = None
-) -> list[Point]:
-    """Central model line, or the lower/upper edge of its uncertainty band."""
-    if data.figure is None or model not in data.figure.models:
-        return []
-    entry = data.figure.models[model]
-    if bound is None:
-        return entry.points
-    return [Point(b.time, b.upper if bound == HIGH else b.lower) for b in entry.band]
-
-
 def crossings(
     data: WaterLevelData,
     now: datetime,
     threshold: float,
     kind: str,
-    use_band: bool,
     horizon: timedelta | None = None,
 ) -> list[Crossing]:
     """Collect every source that reaches the threshold in the horizon."""
@@ -67,19 +49,16 @@ def crossings(
         return value >= threshold if kind == HIGH else value <= threshold
 
     found: list[Crossing] = []
-    if data.figure and data.figure.observations:
-        latest = data.figure.observations[-1]
+    station = data.station
+    if station and station.observations:
+        latest = station.observations[-1]
         if hit(latest.value):
             found.append(Crossing("observation", latest, latest))
 
-    for model in sorted(data.figure.models) if data.figure else []:
-        sources = [(model, model_series(data, model))]
-        if use_band:
-            sources.append((f"{model}_band", model_series(data, model, kind)))
-        for source, series in sources:
-            hits = [p for p in upcoming(series, now, horizon) if hit(p.value)]
-            if hits:
-                found.append(Crossing(source, hits[0], extreme(hits, kind)))
+    if station:
+        hits = [p for p in upcoming(station.forecast, now, horizon) if hit(p.value)]
+        if hits:
+            found.append(Crossing("forecast", hits[0], extreme(hits, kind)))
 
     if data.official:
         for period in data.official.periods:

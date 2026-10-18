@@ -1,0 +1,980 @@
+{
+ "forecast_text": {
+  "de": "Sonntag im Tagesverlauf werden sinkende Wasserstände erwartet. Im Laufe des Vormittags wird die Sturmflut in der Kieler Bucht und in der Lübecker Bucht beendet sein.\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t",
+  "en": ""
+ },
+ "forecast_table": {
+  "forecasts": [
+   {
+    "area": "Kieler Bucht",
+    "description": {
+     "de": "Vorhersage vom 2026-10-18 07:45:06 Uhr. Die erwarteten Abweichungen vom Normalhöhennull im Bereich Kieler Bucht sind: Bis Sonntag Abend zwischen +25cm und +115cm, Sonntag in der Nacht zwischen +20cm und +55cm und Montag im Tagesverlauf zwischen +25cm und +55cm.",
+     "en": "Forecast from 2026-10-18 07:45:06. The expected deviations from the NHN in the area Kieler Bucht are: Between +25cm and +115cm until Sunday evening, between +20cm and +55cm during Sunday night, and between +25cm and +55cm during Monday."
+    }
+   },
+   {
+    "area": "Lübecker Bucht",
+    "description": {
+     "de": "Vorhersage vom 2026-10-18 07:45:06 Uhr. Die erwarteten Abweichungen vom Normalhöhennull im Bereich Lübecker Bucht sind: Bis Sonntag Abend zwischen +35cm und +115cm, Sonntag in der Nacht zwischen +30cm und +65cm und Montag im Tagesverlauf zwischen +30cm und +55cm.",
+     "en": "Forecast from 2026-10-18 07:45:06. The expected deviations from the NHN in the area Lübecker Bucht are: Between +35cm and +115cm until Sunday evening, between +30cm and +65cm during Sunday night, and between +30cm and +55cm during Monday."
+    }
+   },
+   {
+    "area": "Westlich Rügens",
+    "description": {
+     "de": "Vorhersage vom 2026-10-18 07:45:06 Uhr. Die erwarteten Abweichungen vom Normalhöhennull im Bereich Westlich Rügens sind: Bis Sonntag Abend zwischen +30cm und +90cm, Sonntag in der Nacht zwischen +25cm und +60cm und Montag im Tagesverlauf zwischen +25cm und +50cm.",
+     "en": "Forecast from 2026-10-18 07:45:06. The expected deviations from the NHN in the area Westlich Rügens are: Between +30cm and +90cm until Sunday evening, between +25cm and +60cm during Sunday night, and between +25cm and +50cm during Monday."
+    }
+   },
+   {
+    "area": "Östlich Rügens",
+    "description": {
+     "de": "Vorhersage vom 2026-10-18 07:45:06 Uhr. Die erwarteten Abweichungen vom Normalhöhennull im Bereich Östlich Rügens sind: Bis Sonntag Abend zwischen +40cm und +90cm, Sonntag in der Nacht zwischen +30cm und +70cm und Montag im Tagesverlauf zwischen +30cm und +60cm.",
+     "en": "Forecast from 2026-10-18 07:45:06. The expected deviations from the NHN in the area Östlich Rügens are: Between +40cm and +90cm until Sunday evening, between +30cm and +70cm during Sunday night, and between +30cm and +60cm during Monday."
+    }
+   },
+   {
+    "area": "Kleines Haff",
+    "description": {
+     "de": "Vorhersage vom 2026-10-18 07:45:06 Uhr. Die erwarteten Abweichungen vom Normalhöhennull im Bereich Kleines Haff sind: Bis Sonntag Abend zwischen +55cm und +75cm, Sonntag in der Nacht zwischen +40cm und +70cm und Montag im Tagesverlauf zwischen +35cm und +55cm.",
+     "en": "Forecast from 2026-10-18 07:45:06. The expected deviations from the NHN in the area Kleines Haff are: Between +55cm and +75cm until Sunday evening, between +40cm and +70cm during Sunday night, and between +35cm and +55cm during Monday."
+    }
+   }
+  ],
+  "periods": [
+   {
+    "title": {
+     "de": "Bis Sonntag Abend",
+     "en": "Until Sunday evening"
+    },
+    "forecasts": [
+     {
+      "lower_limit": "+25",
+      "upper_limit": "+115",
+      "warning": "Sturmflut"
+     },
+     {
+      "lower_limit": "+35",
+      "upper_limit": "+115",
+      "warning": "Sturmflut"
+     },
+     {
+      "lower_limit": "+30",
+      "upper_limit": "+90",
+      "warning": "Wasserstandsvorhersage"
+     },
+     {
+      "lower_limit": "+40",
+      "upper_limit": "+90",
+      "warning": "Wasserstandsvorhersage"
+     },
+     {
+      "lower_limit": "+55",
+      "upper_limit": "+75",
+      "warning": "Wasserstandsvorhersage"
+     }
+    ]
+   },
+   {
+    "title": {
+     "de": "Sonntag in der Nacht",
+     "en": "During Sunday night"
+    },
+    "forecasts": [
+     {
+      "lower_limit": "+20",
+      "upper_limit": "+55",
+      "warning": "Wasserstandsvorhersage"
+     },
+     {
+      "lower_limit": "+30",
+      "upper_limit": "+65",
+      "warning": "Wasserstandsvorhersage"
+     },
+     {
+      "lower_limit": "+25",
+      "upper_limit": "+60",
+      "warning": "Wasserstandsvorhersage"
+     },
+     {
+      "lower_limit": "+30",
+      "upper_limit": "+70",
+      "warning": "Wasserstandsvorhersage"
+     },
+     {
+      "lower_limit": "+40",
+      "upper_limit": "+70",
+      "warning": "Wasserstandsvorhersage"
+     }
+    ]
+   },
+   {
+    "title": {
+     "de": "Montag im Tagesverlauf",
+     "en": "During Monday"
+    },
+    "forecasts": [
+     {
+      "lower_limit": "+25",
+      "upper_limit": "+55",
+      "warning": "Wasserstandsvorhersage"
+     },
+     {
+      "lower_limit": "+30",
+      "upper_limit": "+55",
+      "warning": "Wasserstandsvorhersage"
+     },
+     {
+      "lower_limit": "+25",
+      "upper_limit": "+50",
+      "warning": "Wasserstandsvorhersage"
+     },
+     {
+      "lower_limit": "+30",
+      "upper_limit": "+60",
+      "warning": "Wasserstandsvorhersage"
+     },
+     {
+      "lower_limit": "+35",
+      "upper_limit": "+55",
+      "warning": "Wasserstandsvorhersage"
+     }
+    ]
+   }
+  ],
+  "subtitle": {
+   "de": "Maximum und Minimum der Abweichungen vom Normalhöhennull (NHN) in Zentimetern",
+   "en": "Maximum und Minimum der Abweichungen vom Normalhöhennull (NHN) in Zentimetern"
+  },
+  "description_href": {
+   "de": "",
+   "en": ""
+  },
+  "forecast_timestamp": "2026-10-18 07:45:06+02:00"
+ },
+ "forecast_text_additional": {
+  "de": "",
+  "en": ""
+ },
+ "global_warning": "Sturmflut",
+ "information_text": {
+  "de": "",
+  "en": ""
+ },
+ "creation_forecast": "2026-10-18 07:45:06+02:00",
+ "copyright": {
+  "de": "©Bundesamt für Seeschifffahrt und Hydrographie (BSH). Das BSH übernimmt für die angegebenen Informationen keine Gewähr. Amtliche Wasserstandsvorhersage des Bundes gemäß §1 SeeAufG.",
+  "en": "©Federal Maritime and Hydrographic Agency (BSH). The BSH accepts no liability for the information provided here. Official water level forecast of the federal government according to §1 SeeAufG."
+ },
+ "gauges": [
+  {
+   "station_name": "Flensburg",
+   "area": "Kieler Bucht",
+   "area_add": "",
+   "bshnr": "DE041",
+   "latitude": 54.79506,
+   "longitude": 9.43302,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "flensburg",
+   "status": 1,
+   "order_id": 101,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/flensburg",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/flensburg"
+   }
+  },
+  {
+   "station_name": "Langballigau",
+   "area": "Kieler Bucht",
+   "area_add": "",
+   "bshnr": "DE042",
+   "latitude": 54.82327,
+   "longitude": 9.65414,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "langballigau",
+   "status": 1,
+   "order_id": 102,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/langballigau",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/langballigau"
+   }
+  },
+  {
+   "station_name": "Schleimünde",
+   "area": "Kieler Bucht",
+   "area_add": "",
+   "bshnr": "DE044",
+   "latitude": 54.67274,
+   "longitude": 10.03669,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "schleimuende",
+   "status": 1,
+   "order_id": 104,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/schleimuende",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/schleimuende"
+   }
+  },
+  {
+   "station_name": "Kappeln",
+   "area": "Kieler Bucht",
+   "area_add": "",
+   "bshnr": "DE052",
+   "latitude": 54.66438,
+   "longitude": 9.93794,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "kappeln",
+   "status": 1,
+   "order_id": 105,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/kappeln",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/kappeln"
+   }
+  },
+  {
+   "station_name": "Schleswig",
+   "area": "Kieler Bucht",
+   "area_add": "",
+   "bshnr": "DE053",
+   "latitude": 54.51143,
+   "longitude": 9.56906,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "schleswig",
+   "status": 1,
+   "order_id": 106,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/schleswig",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/schleswig"
+   }
+  },
+  {
+   "station_name": "Eckernförde",
+   "area": "Kieler Bucht",
+   "area_add": "",
+   "bshnr": "DE054",
+   "latitude": 54.4747,
+   "longitude": 9.83601,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "eckernfoerde",
+   "status": 1,
+   "order_id": 107,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/eckernfoerde",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/eckernfoerde"
+   }
+  },
+  {
+   "station_name": "Leuchtturm Kiel",
+   "area": "Kieler Bucht",
+   "area_add": "",
+   "bshnr": "DE049",
+   "latitude": 54.49959,
+   "longitude": 10.27327,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "kiel-leuchtturm",
+   "status": 1,
+   "order_id": 108,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/kiel-leuchtturm",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/kiel-leuchtturm"
+   }
+  },
+  {
+   "station_name": "Kiel-Holtenau",
+   "area": "Kieler Bucht",
+   "area_add": "",
+   "bshnr": "DE048",
+   "latitude": 54.37209,
+   "longitude": 10.15705,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "kiel-holtenau",
+   "status": 1,
+   "order_id": 109,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/kiel-holtenau",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/kiel-holtenau"
+   }
+  },
+  {
+   "station_name": "Heiligenhafen",
+   "area": "Kieler Bucht",
+   "area_add": "",
+   "bshnr": "DE047",
+   "latitude": 54.37296,
+   "longitude": 11.00566,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "heiligenhafen",
+   "status": 1,
+   "order_id": 110,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/heiligenhafen",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/heiligenhafen"
+   }
+  },
+  {
+   "station_name": "Marienleuchte",
+   "area": "Kieler Bucht",
+   "area_add": "",
+   "bshnr": "DE051",
+   "latitude": 54.49663,
+   "longitude": 11.23887,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "marienleuchte",
+   "status": 1,
+   "order_id": 111,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/marienleuchte",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/marienleuchte"
+   }
+  },
+  {
+   "station_name": "Lippe",
+   "area": "Kieler Bucht",
+   "area_add": "",
+   "bshnr": "DE109",
+   "latitude": 54.33614,
+   "longitude": 10.64584,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "lippe",
+   "status": 1,
+   "order_id": 112,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/lippe",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/lippe"
+   }
+  },
+  {
+   "station_name": "Füsing",
+   "area": "Kieler Bucht",
+   "area_add": "",
+   "bshnr": "DE110",
+   "latitude": 54.53581,
+   "longitude": 9.64251,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "fuesing",
+   "status": 1,
+   "order_id": 113,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/fuesing",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/fuesing"
+   }
+  },
+  {
+   "station_name": "Neustadt",
+   "area": "Lübecker Bucht",
+   "area_add": "",
+   "bshnr": "DE050",
+   "latitude": 54.09652,
+   "longitude": 10.80499,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "neustadt",
+   "status": 1,
+   "order_id": 201,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/neustadt",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/neustadt"
+   }
+  },
+  {
+   "station_name": "Travemünde",
+   "area": "Lübecker Bucht",
+   "area_add": "",
+   "bshnr": "DE056",
+   "latitude": 53.95802,
+   "longitude": 10.87218,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "travemuende",
+   "status": 1,
+   "order_id": 202,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/travemuende",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/travemuende"
+   }
+  },
+  {
+   "station_name": "Lübeck",
+   "area": "Lübecker Bucht",
+   "area_add": "",
+   "bshnr": "DE055",
+   "latitude": 53.89301,
+   "longitude": 10.70307,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "luebeck",
+   "status": 1,
+   "order_id": 203,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/luebeck",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/luebeck"
+   }
+  },
+  {
+   "station_name": "Wismar",
+   "area": "Lübecker Bucht",
+   "area_add": "",
+   "bshnr": "DE046",
+   "latitude": 53.89876,
+   "longitude": 11.45792,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "wismar",
+   "status": 1,
+   "order_id": 204,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/wismar",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/wismar"
+   }
+  },
+  {
+   "station_name": "Timmendorf-Poel",
+   "area": "Lübecker Bucht",
+   "area_add": "",
+   "bshnr": "DE045",
+   "latitude": 53.992,
+   "longitude": 11.37564,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "timmendorf-poel",
+   "status": 1,
+   "order_id": 205,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/timmendorf-poel",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/timmendorf-poel"
+   }
+  },
+  {
+   "station_name": "Dahme-Seebrücke",
+   "area": "Lübecker Bucht",
+   "area_add": "",
+   "bshnr": "DE108",
+   "latitude": 54.22611,
+   "longitude": 11.09076,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "dahme-seebruecke",
+   "status": 1,
+   "order_id": 206,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/dahme-seebruecke",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/dahme-seebruecke"
+   }
+  },
+  {
+   "station_name": "Warnemünde",
+   "area": "Westlich Rügens",
+   "area_add": "",
+   "bshnr": "DE025",
+   "latitude": 54.16973,
+   "longitude": 12.10339,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "warnemuende",
+   "status": 1,
+   "order_id": 301,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/warnemuende",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/warnemuende"
+   }
+  },
+  {
+   "station_name": "Rostock Mühlendamm",
+   "area": "Westlich Rügens",
+   "area_add": "",
+   "bshnr": "DE058",
+   "latitude": 54.08306,
+   "longitude": 12.15511,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "rostock",
+   "status": 1,
+   "order_id": 302,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/rostock",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/rostock"
+   }
+  },
+  {
+   "station_name": "Prerow",
+   "area": "Westlich Rügens",
+   "area_add": "",
+   "bshnr": "DE059",
+   "latitude": 54.459,
+   "longitude": 12.57182,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "prerow",
+   "status": 1,
+   "order_id": 303,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/prerow",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/prerow"
+   }
+  },
+  {
+   "station_name": "Althagen",
+   "area": "Westlich Rügens",
+   "area_add": "",
+   "bshnr": "DE023",
+   "latitude": 54.37176,
+   "longitude": 12.41896,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "althagen",
+   "status": 1,
+   "order_id": 304,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/althagen",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/althagen"
+   }
+  },
+  {
+   "station_name": "Barth",
+   "area": "Westlich Rügens",
+   "area_add": "",
+   "bshnr": "DE026",
+   "latitude": 54.37122,
+   "longitude": 12.72322,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "barth",
+   "status": 1,
+   "order_id": 305,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/barth",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/barth"
+   }
+  },
+  {
+   "station_name": "Barhöft",
+   "area": "Westlich Rügens",
+   "area_add": "",
+   "bshnr": "DE024",
+   "latitude": 54.43454,
+   "longitude": 13.03222,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "barhoeft",
+   "status": 1,
+   "order_id": 306,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/barhoeft",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/barhoeft"
+   }
+  },
+  {
+   "station_name": "Neuendorf Hafen",
+   "area": "Westlich Rügens",
+   "area_add": "",
+   "bshnr": "DE030",
+   "latitude": 54.52449,
+   "longitude": 13.09356,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "neuendorf",
+   "status": 1,
+   "order_id": 307,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/neuendorf",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/neuendorf"
+   }
+  },
+  {
+   "station_name": "Kloster",
+   "area": "Westlich Rügens",
+   "area_add": "",
+   "bshnr": "DE031",
+   "latitude": 54.58477,
+   "longitude": 13.11136,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "kloster",
+   "status": 1,
+   "order_id": 308,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/kloster",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/kloster"
+   }
+  },
+  {
+   "station_name": "Wittower Fähre",
+   "area": "Westlich Rügens",
+   "area_add": "",
+   "bshnr": "DE032",
+   "latitude": 54.55759,
+   "longitude": 13.24513,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "wittower-faehre",
+   "status": 1,
+   "order_id": 309,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/wittower-faehre",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/wittower-faehre"
+   }
+  },
+  {
+   "station_name": "Bodstedt",
+   "area": "Westlich Rügens",
+   "area_add": "",
+   "bshnr": "DE101",
+   "latitude": 54.3722,
+   "longitude": 12.62228,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "bodstedt",
+   "status": 1,
+   "order_id": 310,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/bodstedt",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/bodstedt"
+   }
+  },
+  {
+   "station_name": "Ribnitz",
+   "area": "Westlich Rügens",
+   "area_add": "",
+   "bshnr": "DE102",
+   "latitude": 54.24741,
+   "longitude": 12.4669,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "ribnitz",
+   "status": 1,
+   "order_id": 311,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/ribnitz",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/ribnitz"
+   }
+  },
+  {
+   "station_name": "Zingst (Bodden)",
+   "area": "Westlich Rügens",
+   "area_add": "",
+   "bshnr": "DE103",
+   "latitude": 54.43144,
+   "longitude": 12.68975,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "zingst",
+   "status": 1,
+   "order_id": 312,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/zingst",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/zingst"
+   }
+  },
+  {
+   "station_name": "Ralswiek",
+   "area": "Westlich Rügens",
+   "area_add": "",
+   "bshnr": "DE104",
+   "latitude": 54.47516,
+   "longitude": 13.44748,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "ralswiek",
+   "status": 1,
+   "order_id": 313,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/ralswiek",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/ralswiek"
+   }
+  },
+  {
+   "station_name": "Sassnitz",
+   "area": "Östlich Rügens",
+   "area_add": "",
+   "bshnr": "DE034",
+   "latitude": 54.50829,
+   "longitude": 13.63665,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "sassnitz",
+   "status": 1,
+   "order_id": 401,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/sassnitz",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/sassnitz"
+   }
+  },
+  {
+   "station_name": "Thiessow",
+   "area": "Östlich Rügens",
+   "area_add": "",
+   "bshnr": "DE035",
+   "latitude": 54.28067,
+   "longitude": 13.70976,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "thiessow",
+   "status": 1,
+   "order_id": 402,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/thiessow",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/thiessow"
+   }
+  },
+  {
+   "station_name": "Lauterbach",
+   "area": "Östlich Rügens",
+   "area_add": "",
+   "bshnr": "DE033",
+   "latitude": 54.3416,
+   "longitude": 13.4997,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "lauterbach",
+   "status": 1,
+   "order_id": 403,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/lauterbach",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/lauterbach"
+   }
+  },
+  {
+   "station_name": "Stralsund",
+   "area": "Östlich Rügens",
+   "area_add": "",
+   "bshnr": "DE027",
+   "latitude": 54.30568,
+   "longitude": 13.11901,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "stralsund",
+   "status": 1,
+   "order_id": 404,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/stralsund",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/stralsund"
+   }
+  },
+  {
+   "station_name": "Stahlbrode",
+   "area": "Östlich Rügens",
+   "area_add": "",
+   "bshnr": "DE028",
+   "latitude": 54.23446,
+   "longitude": 13.28971,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "stahlbrode",
+   "status": 1,
+   "order_id": 405,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/stahlbrode",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/stahlbrode"
+   }
+  },
+  {
+   "station_name": "Greifswald Wieck",
+   "area": "Östlich Rügens",
+   "area_add": "",
+   "bshnr": "DE040",
+   "latitude": 54.09771,
+   "longitude": 13.45715,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "greifswald-wieck",
+   "status": 1,
+   "order_id": 406,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/greifswald-wieck",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/greifswald-wieck"
+   }
+  },
+  {
+   "station_name": "Ruden",
+   "area": "Östlich Rügens",
+   "area_add": "",
+   "bshnr": "DE036",
+   "latitude": 54.20435,
+   "longitude": 13.77191,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "ruden",
+   "status": 1,
+   "order_id": 407,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/ruden",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/ruden"
+   }
+  },
+  {
+   "station_name": "Greifswalder Oie",
+   "area": "Östlich Rügens",
+   "area_add": "",
+   "bshnr": "DE037",
+   "latitude": 54.24131,
+   "longitude": 13.90721,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "greifswalder-oie",
+   "status": 1,
+   "order_id": 408,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/greifswalder-oie",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/greifswalder-oie"
+   }
+  },
+  {
+   "station_name": "Koserow",
+   "area": "Östlich Rügens",
+   "area_add": "",
+   "bshnr": "DE039",
+   "latitude": 54.06038,
+   "longitude": 14.00082,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "koserow",
+   "status": 1,
+   "order_id": 409,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/koserow",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/koserow"
+   }
+  },
+  {
+   "station_name": "Karlshagen",
+   "area": "Kleines Haff",
+   "area_add": "",
+   "bshnr": "DE038",
+   "latitude": 54.10786,
+   "longitude": 13.80762,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "karlshagen",
+   "status": 1,
+   "order_id": 501,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/karlshagen",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/karlshagen"
+   }
+  },
+  {
+   "station_name": "Wolgast",
+   "area": "Kleines Haff",
+   "area_add": "",
+   "bshnr": "DE029",
+   "latitude": 54.04174,
+   "longitude": 13.77038,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "wolgast",
+   "status": 1,
+   "order_id": 502,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/wolgast",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/wolgast"
+   }
+  },
+  {
+   "station_name": "Karnin",
+   "area": "Kleines Haff",
+   "area_add": "",
+   "bshnr": "DE001",
+   "latitude": 53.84366,
+   "longitude": 13.85849,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "karnin",
+   "status": 1,
+   "order_id": 503,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/karnin",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/karnin"
+   }
+  },
+  {
+   "station_name": "Ueckermünde",
+   "area": "Kleines Haff",
+   "area_add": "",
+   "bshnr": "DE002",
+   "latitude": 53.75031,
+   "longitude": 14.06648,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "ueckermuende",
+   "status": 1,
+   "order_id": 504,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/ueckermuende",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/ueckermuende"
+   }
+  },
+  {
+   "station_name": "Pudagla",
+   "area": "Kleines Haff",
+   "area_add": "",
+   "bshnr": "DE105",
+   "latitude": 53.9805,
+   "longitude": 14.04969,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "pudagla",
+   "status": 1,
+   "order_id": 505,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/pudagla",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/pudagla"
+   }
+  },
+  {
+   "station_name": "Grambin",
+   "area": "Kleines Haff",
+   "area_add": "",
+   "bshnr": "DE106",
+   "latitude": 53.75316,
+   "longitude": 14.02415,
+   "gauge_group": 3,
+   "warning": "Wasserstandsvorhersage",
+   "seo_id": "grambin",
+   "status": 1,
+   "order_id": 506,
+   "href": {
+    "de": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/grambin",
+    "en": "https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/en/grambin"
+   }
+  }
+ ],
+ "areas": [
+  {
+   "name": "Kieler Bucht",
+   "seo_id": "kieler-bucht",
+   "warning": "Sturmflut"
+  },
+  {
+   "name": "Lübecker Bucht",
+   "seo_id": "luebecker-bucht",
+   "warning": "Sturmflut"
+  },
+  {
+   "name": "Westlich Rügens",
+   "seo_id": "westlich-ruegens",
+   "warning": "Wasserstandsvorhersage"
+  },
+  {
+   "name": "Östlich Rügens",
+   "seo_id": "oestlich-ruegens",
+   "warning": "Wasserstandsvorhersage"
+  },
+  {
+   "name": "Kleines Haff",
+   "seo_id": "kleines-haff",
+   "warning": "Wasserstandsvorhersage"
+  }
+ ]
+}

@@ -6,14 +6,18 @@ from datetime import timedelta
 
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers import entity_registry as er
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 from .api import BshClient
-from .const import CONF_SCAN_INTERVAL, CONF_STATION, DEFAULT_SCAN_INTERVAL
+from .const import CONF_SCAN_INTERVAL, CONF_STATION, DEFAULT_SCAN_INTERVAL, DOMAIN
 from .coordinator import BshCoordinator
 from .entity import BshConfigEntry, BshRuntime
 
 PLATFORMS = [Platform.BINARY_SENSOR, Platform.NUMBER, Platform.SENSOR]
+
+# Model figure entities of v0.1 that the API does not provide.
+_REMOVED_KEYS = ("dmi_high", "dmi_low", "band_high", "band_low")
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: BshConfigEntry) -> bool:
@@ -25,6 +29,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: BshConfigEntry) -> bool:
     coordinator = BshCoordinator(hass, entry, client, interval)
     await coordinator.async_config_entry_first_refresh()
     entry.runtime_data = BshRuntime(coordinator)
+    registry = er.async_get(hass)
+    for key in _REMOVED_KEYS:
+        unique_id = f"{client.station}_{key}"
+        if entity_id := registry.async_get_entity_id("sensor", DOMAIN, unique_id):
+            registry.async_remove(entity_id)
     entry.async_on_unload(entry.add_update_listener(_async_reload))
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True

@@ -13,13 +13,11 @@ from .analysis import HIGH, LOW
 from .const import (
     ATTRIBUTION,
     CONF_HORIZON,
-    CONF_USE_BAND,
     DEFAULT_HIGH_THRESHOLD,
     DEFAULT_HORIZON,
     DEFAULT_LOW_THRESHOLD,
-    DEFAULT_USE_BAND,
     DOMAIN,
-    STATION_URL,
+    PAGE_URL,
 )
 from .coordinator import BshCoordinator
 
@@ -59,13 +57,9 @@ class BshEntity(CoordinatorEntity[BshCoordinator]):
             manufacturer="Bundesamt für Seeschifffahrt und Hydrographie",
             model="Wasserstandsvorhersage Ostsee",
             entry_type=DeviceEntryType.SERVICE,
-            configuration_url=STATION_URL.format(station=station),
+            configuration_url=PAGE_URL.format(station=station),
         )
 
     @property
     def horizon(self) -> timedelta:
         return timedelta(hours=self._entry.options.get(CONF_HORIZON, DEFAULT_HORIZON))
-
-    @property
-    def use_band(self) -> bool:
-        return bool(self._entry.options.get(CONF_USE_BAND, DEFAULT_USE_BAND))

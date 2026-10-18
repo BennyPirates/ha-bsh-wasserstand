@@ -3,17 +3,16 @@
     "step": {
       "user": {
         "title": "BSH Pegel hinzufügen",
-        "description": "Name des Pegels wie in der BSH-Adresse, z. B. travemuende für https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/travemuende",
+        "description": "Pegel aus der Wasserstandsvorhersage des BSH (Nord- und Ostsee).",
         "data": {
           "station": "Pegel"
         }
       }
     },
     "error": {
-      "invalid_station": "Nur Kleinbuchstaben, Ziffern, - und _",
       "station_not_found": "Pegel beim BSH nicht gefunden",
       "cannot_connect": "BSH nicht erreichbar",
-      "unexpected_page": "Seite hat unerwartetes Format"
+      "unexpected_data": "Unerwartetes Datenformat"
     },
     "abort": {
       "already_configured": "Pegel ist bereits eingerichtet"
@@ -25,11 +24,10 @@
         "title": "Einstellungen",
         "data": {
           "scan_interval": "Abrufintervall",
-          "horizon": "Vorhersagehorizont für Extremwerte und Warnungen",
-          "use_band": "Unsicherheitsband für Warnungen berücksichtigen"
+          "horizon": "Vorhersagehorizont für Extremwerte und Warnungen"
         },
         "data_description": {
-          "scan_interval": "Die Modellgrafik ist ca. 5 MB groß; unveränderte Daten werden per HTTP-Cache nicht neu geladen."
+          "scan_interval": "Die Messwerte werden alle 15 min aktualisiert."
         }
       }
     }
@@ -40,22 +38,10 @@
         "name": "Wasserstand"
       },
       "bsh_high": {
-        "name": "Höchststand Vorhersage BSH"
+        "name": "Höchststand Vorhersage"
       },
       "bsh_low": {
-        "name": "Tiefststand Vorhersage BSH"
-      },
-      "dmi_high": {
-        "name": "Höchststand Vorhersage DMI"
-      },
-      "dmi_low": {
-        "name": "Tiefststand Vorhersage DMI"
-      },
-      "band_high": {
-        "name": "Höchststand inkl. Unsicherheit"
-      },
-      "band_low": {
-        "name": "Tiefststand inkl. Unsicherheit"
+        "name": "Tiefststand Vorhersage"
       },
       "official": {
         "name": "Offizielle Vorhersage"
@@ -68,6 +54,9 @@
       },
       "official_issued": {
         "name": "Offizielle Vorhersage erstellt"
+      },
+      "forecast_run": {
+        "name": "Modellvorhersage erstellt"
       }
     },
     "binary_sensor": {

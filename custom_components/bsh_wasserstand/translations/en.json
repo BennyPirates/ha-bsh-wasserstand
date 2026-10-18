@@ -3,17 +3,16 @@
     "step": {
       "user": {
         "title": "Add BSH gauge",
-        "description": "Gauge name as in the BSH address, e.g. travemuende for https://www2.bsh.de/aktdat/wvd/ostsee/pegelkurve/de/travemuende",
+        "description": "Gauge of the BSH water level forecast (North Sea and Baltic Sea).",
         "data": {
           "station": "Gauge"
         }
       }
     },
     "error": {
-      "invalid_station": "Only lowercase letters, digits, - and _",
       "station_not_found": "Gauge not found at BSH",
       "cannot_connect": "Cannot reach BSH",
-      "unexpected_page": "Unexpected page format"
+      "unexpected_data": "Unexpected data format"
     },
     "abort": {
       "already_configured": "Gauge already configured"
@@ -25,11 +24,10 @@
         "title": "Settings",
         "data": {
           "scan_interval": "Polling interval",
-          "horizon": "Forecast horizon for extremes and alerts",
-          "use_band": "Include uncertainty band in alerts"
+          "horizon": "Forecast horizon for extremes and alerts"
         },
         "data_description": {
-          "scan_interval": "The model figure is about 5 MB; unchanged data is not downloaded again thanks to HTTP caching."
+          "scan_interval": "Measurements are updated every 15 minutes."
         }
       }
     }
@@ -40,22 +38,10 @@
         "name": "Water level"
       },
       "bsh_high": {
-        "name": "Forecast high BSH"
+        "name": "Forecast high"
       },
       "bsh_low": {
-        "name": "Forecast low BSH"
-      },
-      "dmi_high": {
-        "name": "Forecast high DMI"
-      },
-      "dmi_low": {
-        "name": "Forecast low DMI"
-      },
-      "band_high": {
-        "name": "Forecast high incl. uncertainty"
-      },
-      "band_low": {
-        "name": "Forecast low incl. uncertainty"
+        "name": "Forecast low"
       },
       "official": {
         "name": "Official forecast"
@@ -68,6 +54,9 @@
       },
       "official_issued": {
         "name": "Official forecast issued"
+      },
+      "forecast_run": {
+        "name": "Model forecast issued"
       }
     },
     "binary_sensor": {
