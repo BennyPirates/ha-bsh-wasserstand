@@ -26,12 +26,14 @@
           "scan_interval": "Abrufintervall",
           "horizon": "Vorhersagehorizont für Extremwerte und Warnungen",
           "dmi": "DMI-Sturmflutmodell als Zweitmeinung laden",
-          "reference": "Bezugspunkt (z. B. Liegeplatz)"
+          "reference": "Bezugspunkt (z. B. Liegeplatz)",
+          "wind": "DWD-Wind laden (Messung und Vorhersage)"
         },
         "data_description": {
           "scan_interval": "Die Messwerte werden alle 15 min aktualisiert.",
           "dmi": "Nächster Modellpunkt mit Wasser, stündlich abgerufen. Fließt nicht in die Warnstufen ein.",
-          "reference": "Optional. Zeigt, wie weit Pegel und DMI-Modellpunkt davon entfernt sind."
+          "reference": "Optional. Zeigt, wie weit Pegel und DMI-Modellpunkt davon entfernt sind.",
+          "wind": "Stündlich über Bright Sky am Bezugspunkt, sonst am Pegel. Geschwindigkeit in Knoten."
         }
       }
     }
@@ -89,6 +91,9 @@
       },
       "reference_distance_dmi": {
         "name": "Entfernung Bezugspunkt zum DMI-Modellpunkt"
+      },
+      "wind": {
+        "name": "Wind"
       }
     },
     "binary_sensor": {

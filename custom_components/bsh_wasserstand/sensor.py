@@ -10,7 +10,7 @@ from homeassistant.components.sensor import (
     SensorEntity,
     SensorStateClass,
 )
-from homeassistant.const import EntityCategory, UnitOfLength
+from homeassistant.const import EntityCategory, UnitOfLength, UnitOfSpeed
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.util import dt as dt_util
@@ -25,8 +25,9 @@ from .analysis import (
     extreme,
     upcoming,
 )
+from .const import WIND_ATTRIBUTION
 from .entity import BshConfigEntry, BshEntity
-from .parser import Point, distance_km
+from .parser import Point, WindPoint, distance_km
 
 
 async def async_setup_entry(
@@ -51,6 +52,7 @@ async def async_setup_entry(
             ReferenceDistanceSensor(entry, "dmi"),
             AlertLevelSensor(entry, HIGH),
             AlertLevelSensor(entry, LOW),
+            WindSensor(entry),
         ]
     )
 
@@ -179,6 +181,63 @@ class DmiExtremeSensor(LevelSensor):
             # Include the past hours of the run for comparison with measurements.
             attrs["forecast"] = _series(dmi.points)
         return attrs
+
+
+class WindSensor(BshEntity, SensorEntity):
+    """DWD wind at the reference point: current speed, hourly series."""
+
+    _attr_device_class = SensorDeviceClass.WIND_SPEED
+    _attr_native_unit_of_measurement = UnitOfSpeed.KNOTS
+    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_suggested_display_precision = 0
+    _attr_attribution = WIND_ATTRIBUTION
+    _unrecorded_attributes = frozenset({"forecast", "sources"})
+
+    def __init__(self, entry: BshConfigEntry) -> None:
+        super().__init__(entry, "wind")
+
+    @property
+    def _points(self) -> list[WindPoint]:
+        wind = self.coordinator.data.wind
+        return wind.points if wind else []
+
+    @property
+    def _current(self) -> WindPoint | None:
+        now = dt_util.now()
+        past = [p for p in self._points if p.time <= now]
+        return past[-1] if past else None
+
+    @property
+    def available(self) -> bool:
+        return super().available and self._current is not None
+
+    @property
+    def native_value(self) -> float | None:
+        return self._current.speed if self._current else None
+
+    @property
+    def extra_state_attributes(self) -> dict[str, Any]:
+        current, now = self._current, dt_util.now()
+        ahead = [p for p in self._points if now < p.time <= now + self.horizon]
+        gusts = [p for p in ahead if p.gust is not None]
+        top = max(gusts, key=lambda p: p.gust or 0) if gusts else None
+        wind = self.coordinator.data.wind
+        return {
+            "direction": current.direction if current else None,
+            "gust": current.gust if current else None,
+            "max_gust": top.gust if top else None,
+            "max_gust_time": _iso(top.time) if top else None,
+            "sources": wind.sources if wind else [],
+            "forecast": [
+                {
+                    "time": p.time.isoformat(),
+                    "speed": p.speed,
+                    "gust": p.gust,
+                    "direction": p.direction,
+                }
+                for p in self._points
+            ],
+        }
 
 
 class OfficialForecastSensor(BshEntity, SensorEntity):

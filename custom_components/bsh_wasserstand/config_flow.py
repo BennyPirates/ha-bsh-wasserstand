@@ -22,10 +22,12 @@ from .const import (
     CONF_REFERENCE,
     CONF_SCAN_INTERVAL,
     CONF_STATION,
+    CONF_WIND,
     DEFAULT_DMI,
     DEFAULT_HORIZON,
     DEFAULT_SCAN_INTERVAL,
     DEFAULT_STATION,
+    DEFAULT_WIND,
     DOMAIN,
     MIN_SCAN_INTERVAL,
 )
@@ -136,6 +138,9 @@ class BshOptionsFlow(OptionsFlow):
                     ),
                     vol.Required(
                         CONF_DMI, default=options.get(CONF_DMI, DEFAULT_DMI)
+                    ): selector.BooleanSelector(),
+                    vol.Required(
+                        CONF_WIND, default=options.get(CONF_WIND, DEFAULT_WIND)
                     ): selector.BooleanSelector(),
                     vol.Optional(
                         CONF_REFERENCE,

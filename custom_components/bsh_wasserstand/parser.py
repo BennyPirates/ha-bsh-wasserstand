@@ -68,6 +68,24 @@ class DmiForecast:
 
 
 @dataclass(frozen=True, slots=True)
+class WindPoint:
+    """Hourly wind in knots, direction in degrees (where it comes from)."""
+
+    time: datetime
+    speed: float
+    gust: float | None
+    direction: float | None
+
+
+@dataclass(frozen=True, slots=True)
+class WindForecast:
+    """DWD observations and MOSMIX forecast near a position."""
+
+    points: list[WindPoint]
+    sources: list[str]
+
+
+@dataclass(frozen=True, slots=True)
 class WaterLevelData:
     """Combined result of one update."""
 
@@ -75,6 +93,7 @@ class WaterLevelData:
     official: OfficialForecast | None
     errors: list[str] = field(default_factory=list)
     dmi: DmiForecast | None = None
+    wind: WindForecast | None = None
 
 
 def _time(raw: object) -> datetime | None:
@@ -241,3 +260,33 @@ def parse_dmi(
         distance_km=round(distance_km(lon, lat, node_lon, node_lat), 2),
         points=sorted(points, key=lambda p: p.time),
     )
+
+
+KMH_PER_KNOT = 1.852
+
+
+def parse_wind(document: dict[str, Any]) -> WindForecast:
+    """Parse a Bright Sky weather response (km/h) into knots."""
+    points = []
+    for record in document.get("weather") or []:
+        time, speed = _time(record.get("timestamp")), _number(record.get("wind_speed"))
+        if time is None or speed is None:
+            continue
+        gust = _number(record.get("wind_gust_speed"))
+        points.append(
+            WindPoint(
+                time=time,
+                speed=round(speed / KMH_PER_KNOT, 1),
+                gust=round(gust / KMH_PER_KNOT, 1) if gust is not None else None,
+                direction=_number(record.get("wind_direction")),
+            )
+        )
+    if not points:
+        raise ParseError("no wind values")
+    used = {record.get("source_id") for record in document.get("weather") or []}
+    sources = [
+        f"{source.get('station_name')} ({source.get('observation_type')})"
+        for source in document.get("sources") or []
+        if source.get("id") in used
+    ]
+    return WindForecast(sorted(points, key=lambda p: p.time), sources)

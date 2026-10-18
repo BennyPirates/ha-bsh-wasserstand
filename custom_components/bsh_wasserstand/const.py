@@ -20,17 +20,25 @@ DMI_INTERVAL_MINUTES = 60
 DMI_SEARCH_LON = 0.15
 DMI_SEARCH_LAT = 0.08
 
+# DWD wind (MOSMIX forecast + station observations) via the Bright Sky API.
+WIND_URL = "https://api.brightsky.dev/weather"
+WIND_INTERVAL_MINUTES = 60
+WIND_HISTORY_HOURS = 24
+WIND_ATTRIBUTION = "Wind: Deutscher Wetterdienst (DWD) via Bright Sky"
+
 CONF_STATION = "station"
 CONF_SCAN_INTERVAL = "scan_interval"
 CONF_HORIZON = "horizon"
 CONF_DMI = "dmi"
 CONF_REFERENCE = "reference"
+CONF_WIND = "wind"
 
 DEFAULT_STATION = "travemuende"
 DEFAULT_SCAN_INTERVAL = 15
 MIN_SCAN_INTERVAL = 5
 DEFAULT_HORIZON = 72
 DEFAULT_DMI = True
+DEFAULT_WIND = True
 
 # Alert thresholds in cm NHN, keyed by "<kind>" (warning) and "<kind>_pre".
 DEFAULT_THRESHOLDS = {"high": 100, "high_pre": 80, "low": -50, "low_pre": -30}

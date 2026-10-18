@@ -26,12 +26,14 @@
           "scan_interval": "Polling interval",
           "horizon": "Forecast horizon for extremes and alerts",
           "dmi": "Load DMI storm surge model as second opinion",
-          "reference": "Reference point (e.g. berth)"
+          "reference": "Reference point (e.g. berth)",
+          "wind": "Load DWD wind (observations and forecast)"
         },
         "data_description": {
           "scan_interval": "Measurements are updated every 15 minutes.",
           "dmi": "Nearest model node with water, fetched hourly. Not used for alert levels.",
-          "reference": "Optional. Shows how far the gauge and the DMI model node are away."
+          "reference": "Optional. Shows how far the gauge and the DMI model node are away.",
+          "wind": "Hourly from Bright Sky at the reference point, otherwise at the gauge. Speeds in knots."
         }
       }
     }
@@ -89,6 +91,9 @@
       },
       "reference_distance_dmi": {
         "name": "Distance reference to DMI model node"
+      },
+      "wind": {
+        "name": "Wind"
       }
     },
     "binary_sensor": {

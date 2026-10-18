@@ -12,13 +12,20 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, Upda
 from .api import BshClient, BshError
 from .const import (
     CONF_DMI,
+    CONF_HORIZON,
+    CONF_REFERENCE,
+    CONF_WIND,
     DEFAULT_DMI,
+    DEFAULT_HORIZON,
+    DEFAULT_WIND,
     DMI_INTERVAL_MINUTES,
     DMI_PARAMETER,
     DMI_SEARCH_LAT,
     DMI_SEARCH_LON,
     DOMAIN,
     SEAS,
+    WIND_HISTORY_HOURS,
+    WIND_INTERVAL_MINUTES,
 )
 from .parser import (
     DmiForecast,
@@ -26,10 +33,12 @@ from .parser import (
     ParseError,
     Station,
     WaterLevelData,
+    WindForecast,
     nearest_wet_node,
     parse_dmi,
     parse_official,
     parse_station,
+    parse_wind,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -60,6 +69,8 @@ class BshCoordinator(DataUpdateCoordinator[WaterLevelData]):
         self._dmi: DmiForecast | None = None
         self._dmi_node: tuple[float, float] | None = None
         self._dmi_fetched: datetime | None = None
+        self._wind: WindForecast | None = None
+        self._wind_fetched: datetime | None = None
 
     async def _async_update_data(self) -> WaterLevelData:
         errors: list[str] = []
@@ -87,9 +98,13 @@ class BshCoordinator(DataUpdateCoordinator[WaterLevelData]):
             raise UpdateFailed("; ".join(errors))
         if self.config_entry.options.get(CONF_DMI, DEFAULT_DMI):
             await self._async_update_dmi(self._station)
+        if self.config_entry.options.get(CONF_WIND, DEFAULT_WIND):
+            await self._async_update_wind(self._station)
         for message in errors:
             _LOGGER.warning("BSH %s: %s", self.client.station, message)
-        return WaterLevelData(self._station, self._official, errors, self._dmi)
+        return WaterLevelData(
+            self._station, self._official, errors, self._dmi, self._wind
+        )
 
     async def _async_update_dmi(self, station: Station) -> None:
         """Refresh the DMI second opinion hourly; it is optional, never fatal."""
@@ -124,3 +139,31 @@ class BshCoordinator(DataUpdateCoordinator[WaterLevelData]):
             # Retry sooner than the regular hour, DMI throttles with HTTP 429.
             self._dmi_fetched = now - due + timedelta(minutes=15)
             _LOGGER.debug("DMI %s: %s", station.label, error)
+
+    async def _async_update_wind(self, station: Station) -> None:
+        """Refresh DWD wind hourly at the reference point, else at the gauge."""
+        now = datetime.now(UTC)
+        due = timedelta(minutes=WIND_INTERVAL_MINUTES)
+        if self._wind_fetched and now - self._wind_fetched < due:
+            return
+        options = self.config_entry.options
+        point = options.get(CONF_REFERENCE) or {}
+        if "latitude" in point and "longitude" in point:
+            lon, lat = float(point["longitude"]), float(point["latitude"])
+        elif station.longitude is not None and station.latitude is not None:
+            lon, lat = station.longitude, station.latitude
+        else:
+            return
+        self._wind_fetched = now
+        hours = options.get(CONF_HORIZON, DEFAULT_HORIZON)
+        try:
+            document = await self.client.wind(
+                lon,
+                lat,
+                now - timedelta(hours=WIND_HISTORY_HOURS),
+                now + timedelta(hours=hours),
+            )
+            self._wind = parse_wind(document)
+        except (BshError, ParseError) as error:
+            self._wind_fetched = now - due + timedelta(minutes=15)
+            _LOGGER.debug("Wind %s: %s", station.label, error)

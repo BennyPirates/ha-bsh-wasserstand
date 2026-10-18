@@ -3,11 +3,19 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import datetime
 from typing import Any
 
 import aiohttp
 
-from .const import AREA_URL, DMI_PARAMETER, DMI_URL, STATION_URL, STATIONS_URL
+from .const import (
+    AREA_URL,
+    DMI_PARAMETER,
+    DMI_URL,
+    STATION_URL,
+    STATIONS_URL,
+    WIND_URL,
+)
 
 TIMEOUT = aiohttp.ClientTimeout(total=60)
 
@@ -34,7 +42,7 @@ class BshClient:
         self.station = station
         self._cache: dict[str, _Cached] = {}
 
-    async def _get(self, url: str) -> tuple[Any, bool]:
+    async def _get(self, url: str, cache: bool = True) -> tuple[Any, bool]:
         """Return the document and whether it changed since the last call."""
         cached = self._cache.get(url)
         headers = {"Accept": "application/json, application/geo+json, */*;q=0.5"}
@@ -57,7 +65,8 @@ class BshClient:
                     validators["If-Modified-Since"] = modified
                 elif etag := resp.headers.get("ETag"):
                     validators["If-None-Match"] = etag
-                self._cache[url] = _Cached(validators, document)
+                if cache:
+                    self._cache[url] = _Cached(validators, document)
                 return document, True
         except (aiohttp.ClientError, TimeoutError, ValueError) as error:
             raise BshError(f"{url}: {error}") from error
@@ -88,6 +97,17 @@ class BshClient:
             f"&parameter-name={DMI_PARAMETER}&f=GeoJSON"
         )
         document, _ = await self._get(url)
+        return document
+
+    async def wind(self, lon: float, lat: float, start: datetime, end: datetime) -> Any:
+        """DWD wind observations and forecast near a position (Bright Sky)."""
+        fmt = "%Y-%m-%dT%H:%MZ"
+        url = (
+            f"{WIND_URL}?lat={lat:.5f}&lon={lon:.5f}"
+            f"&date={start.strftime(fmt)}&last_date={end.strftime(fmt)}&tz=UTC"
+        )
+        # The time window moves, so the URL changes on every call.
+        document, _ = await self._get(url, cache=False)
         return document
 
     async def stations(self) -> Any:

@@ -33,10 +33,11 @@ converts them to NHN/SKN like the BSH web pages.
 | Warnstufe Hochwasser / Niedrigwasser | Enum `none` / `prewarning` / `warning`: highest level reached by the measurement or the BSH model forecast within the horizon (the official ranges are information only), with 5 cm hysteresis when falling; attribute `details` per source; attributes `threshold`, `first_time`, `peak`, `peak_time`, `sources` |
 | Hochwasser erwartet / Niedrigwasser erwartet | On when the warning threshold is reached: the measurement or the model forecast reaches the threshold within the horizon; attributes `first_time`, `peak`, `sources` |
 | Höchststand / Tiefststand Vorhersage DMI | Optional second opinion: DMI storm surge model (DKSS, ~0.9 km grid, CC BY 4.0) at the nearest model node with water, fetched hourly; not used for alert levels |
+| Wind | Optional (default on): DWD wind in knots at the reference point (else the gauge), fetched hourly from [Bright Sky](https://brightsky.dev); state = current speed, attributes direction, gust, max gust within the horizon and an hourly `forecast` series (past 24 h observations + MOSMIX forecast) |
 | Entfernung Bezugspunkt zum Pegel / DMI-Modellpunkt | Distances from an optional reference point (e.g. the berth) set in the options |
 | Datenproblem | On when a download/parse failed or the latest measurement is older than 3 h |
 
-Options: polling interval, horizon (default 72 h), DMI second opinion (default on), reference point.
+Options: polling interval, horizon (default 72 h), DMI second opinion (default on), DWD wind (default on), reference point.
 
 ## Installation
 

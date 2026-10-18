@@ -206,5 +206,22 @@ class DmiTest(unittest.TestCase):
             parser.parse_dmi(land, self.LON, self.LAT, "sea-mean-deviation")
 
 
+class WindTest(unittest.TestCase):
+    def test_parse_wind_converts_to_knots(self) -> None:
+        wind = parser.parse_wind(fixture("brightsky.json"))
+        self.assertEqual(len(wind.points), 6)
+        first = wind.points[0]
+        self.assertEqual(first.time, datetime(2026, 10, 18, 10, tzinfo=UTC))
+        self.assertAlmostEqual(first.speed, 16.7)
+        self.assertAlmostEqual(first.gust, 28.6)
+        self.assertEqual(first.direction, 80)
+        self.assertIn("TRAVEMUENDE (forecast)", wind.sources)
+        self.assertIn("PELZERHAKEN (current)", wind.sources)
+
+    def test_parse_wind_without_values_fails(self) -> None:
+        with self.assertRaises(parser.ParseError):
+            parser.parse_wind({"weather": [{"timestamp": "2026-10-18T10:00:00+00:00"}]})
+
+
 if __name__ == "__main__":
     unittest.main()
